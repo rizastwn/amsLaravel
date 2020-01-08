@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li>
-                        <a href="/orangtua/">
+                        <a href="/orangtua">
                                 <i class="fa fa-address-card"></i> Profil Orang tua murid
                             </a>
                         </li>
@@ -113,18 +113,29 @@
                         @if (Auth::user()->role == 'wali kelas')
                         
                         <li>
-                            <a href="daftarNilaiTema">
-                                <i class="fa fa-book"></i> Nilai Tema
+                            <a href="/daftarNilaiTema">
+                                <i class="fa fa-book"></i> Daftar Nilai Tema
                             </a>
                         </li>
                         <li>
-                            <a href="daftarNilaiUtsUas">
-                                <i class="fa fa-book"></i> Nilai UTS dan UAS
+                        <li>
+                            <a href="/daftarNilaiSubtema">
+                                <i class="fa fa-book"></i> Daftar Nilai Subtema
                             </a>
                         </li>
                         <li>
-                            <a href="daftarNilaiRapot">
-                                <i class="fa fa-briefcase"></i> Nilai Rapot
+                            <a href="/subtema">
+                                <i class="fa fa-book"></i> Rancangan Subtema
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/daftarNilaiUtsUas">
+                                <i class="fa fa-book"></i> Daftar Nilai UTS dan UAS
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/daftarNilaiRapot">
+                                <i class="fa fa-briefcase"></i> Daftar Nilai Rapot
                             </a>
                         </li>
                         

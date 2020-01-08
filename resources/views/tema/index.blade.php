@@ -12,7 +12,7 @@
     <h2 >Daftar Nilai Tema  </h2>
     <h4>Kelas : {{$kelas->kelas}}</h4>
     <h4>Semester : {{$kelas->semester}}</h4>
-    <h4>Tema : {{$nilaiTema->tema}}</h4>
+    <h4 >Tema : {{$nilaiTema->tema}}</h4>
     
         <form action="/nilaiTema/lihat" method="GET"  class="form-inline" role="form">
             <div class="form-group col-md-2">
@@ -46,10 +46,10 @@
         </form>
     
     <div class="card-body">
-        <h4>Judul : {{$judul->judul}}</h4>
-        <h4>Tujuan Tema : {{$judul->isi}}</h4>
-        <h4>Sikap Spritual : <br> {{$nilaiSikap->spiritual}}</h4>
-        <h4>Sikap Sosial : <br> {{$nilaiSikap->sosial}}</h4>
+        <h6 >Judul : {{$judul->judul}}</h6>
+        <h6 align="justify">Tujuan Tema : {{$judul->isi}}</h6>
+        <h6 align="justify">Sikap Spritual : <br> {{$nilaiSikap->spiritual}}</h6>
+        <h6 align="justify">Sikap Sosial : <br> {{$nilaiSikap->sosial}}</h6>
 
     </div>
     <div class="card-body">

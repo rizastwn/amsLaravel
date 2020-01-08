@@ -1,32 +1,33 @@
 @extends('layouts.app')
 @section('content')
 <div class="card">
+    @if ($infotema!= null)
     <div class="card-header">
-            <h2>Jadwal Akademik</h5>
-            <h4>Kelas : {{$infotema->kelas}}</h4>
-            <h4>Semester : {{$infotema->semester}}</h4>
-            <br>
-        <form action="/daftarTema/lihat" method="GET"  class="form-inline" role="form">
-            <div class="form-group col-md-2">
-                <label for="sel1">Kelas : </label>
-                <select name="kelas"  class="form-control" id="sel1">
-                    <option value="1" >1</option>
-                    <option value="2">2</option>
-                    <option value="3" >3</option>
-                </select>
-            </div>
-            <div class="form-group col-md-3" >
-                <label for="sel1">Semester : </label>
-                <select name="semester" class="form-control" id="sel1">
-                    <option value="ganjil">Ganjil</option>
-                    <option value="genap">Genap</option>
-                </select>
-            </div>
-            <input type="submit" class="btn btn-success" value="cari jadwal">
-            <div class="col-md-3">
-                <a href="/daftarTema/create" class="btn btn-info">buat jadwal baru</a>
-            </div>
-        </form>
+        <h2>Jadwal Akademik</h5>
+        <h4>Kelas : {{$infotema->kelas}}</h4>
+        <h4>Semester : {{$infotema->semester}}</h4>
+        <br>
+    <form action="/daftarTema/lihat" method="GET"  class="form-inline" role="form">
+        <div class="form-group col-md-2">
+            <label for="sel1">Kelas : </label>
+            <select name="kelas"  class="form-control" id="sel1">
+                <option value="1" >1</option>
+                <option value="2">2</option>
+                <option value="3" >3</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3" >
+            <label for="sel1">Semester : </label>
+            <select name="semester" class="form-control" id="sel1">
+                <option value="ganjil">Ganjil</option>
+                <option value="genap">Genap</option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-success" value="cari jadwal">
+        <div class="col-md-3">
+            <a href="/daftarTema/create" class="btn btn-info">buat jadwal baru</a>
+        </div>
+    </form>
     </div>
 
     <div class="card-body ">
@@ -59,5 +60,7 @@
             </tbody>
         </table>
     </div>
+    @endif
+    <h3>Data tidak ditemukan!</h3>
     
 @endsection

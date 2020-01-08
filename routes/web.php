@@ -35,7 +35,8 @@ Route::resources([
     'naikKelas' => 'kelasController',
     'jadwalAkademik' => 'jadwalController',
     'daftarTema' => 'temaController',
-    'standarNilai' => 'nilaiController'
+    'standarNilai' => 'nilaiController',
+    'subtema' => 'subtemaController',
 ]);
 
 Route::get('/daftarSiswa', 'SiswaController@daftarSiswa');
@@ -43,6 +44,8 @@ Route::get('/daftarOrangtua', 'orangtuaController@daftarOrangtua');
 Route::get('/daftarNilaiTema', 'nilaiTemaController@daftarNilaiTema');
 Route::get('/daftarNilaiUtsUas', 'nilaiUtsUasController@daftarNilaiUtsUas');
 Route::get('/daftarNilaiRapot', 'nilaiRapotController@daftarNilaiRapot');
+Route::get('/daftarNilaiSubtema', 'nilaiTemaController@daftarNilaiSubtema');
+Route::get('/nilaiSubTema/{nilaiTema}', 'nilaiTemaController@nilaiSubtema');
 
 
 

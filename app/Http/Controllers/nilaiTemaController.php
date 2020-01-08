@@ -12,6 +12,7 @@ use App\nilaiSikapSpritual;
 use App\nilaiTema;
 use App\Charts\nilaiTemaChart;
 use App\Charts\rataTema;
+use App\nilaiSubtema;
 use App\tema;
 use Illuminate\Support\Facades\Auth;
 
@@ -1422,6 +1423,30 @@ class nilaiTemaController extends Controller
         return view('tema.index')->with(['nilaiTemaChart' => $nilaiTemaChart,'kelas' => $kelas, 'nilai' => $nilai,'nilaiTema' => $nilaiTema,'nilaiSikap' => $nilaiSikap]);
     }
 
+    public function daftarNilaiSubtema(Request $request)
+    {
+        $user = Auth::user();
+            if(request()->has('semester')){
+                $namaSiswa = DB::table('siswas')
+                ->join('kelas', 'kelas.idSiswa', '=', 'siswas.id')
+                ->select('siswas.nama','kelas.*')
+                ->where('kelas.idWaliKelas', $user->id)
+                ->where('kelas.kelas', $user->kelas)
+                ->where('kelas.semester',request('semester'))
+                ->where('kelas.status', 'proses pembelajaran')
+                ->get();
+            }else {
+                $namaSiswa = DB::table('siswas')
+                ->join('kelas', 'kelas.idSiswa', '=', 'siswas.id')
+                ->select('siswas.nama','kelas.*')
+                ->where('kelas.idWaliKelas', $user->id)
+                ->where('kelas.kelas', $user->kelas)
+                ->where('kelas.semester','ganjil')
+                ->where('kelas.status', 'proses pembelajaran')
+                ->get();
+            }
+        return view('nilaiSubtema.daftarNilai')->with(['namaSiswa'=> $namaSiswa]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -1482,6 +1507,15 @@ class nilaiTemaController extends Controller
 
     }
 
+    //untuk melihat nilai subtema siswa
+    public function nilaiSubtema(Request $request, $id)
+    {
+        $kelas = kelas::find($id);
+        $siswa = siswa::where('id',$kelas->idSiswa)->first();
+        $nilaiTema = nilaiSubtema::where('idKelas',$kelas->id)->first();
+        $nilai = nilaiSubtema::where('idKelas',$kelas->id)->get();
+        return view('tema.showSubtema')->with(['nilaiTema' => $nilaiTema,'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -1510,8 +1544,7 @@ class nilaiTemaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        
+    {  
         $pRata = (($request->input('p1')+$request->input('p2')+$request->input('p3'))/3);
         $kRata = (($request->input('k1')+$request->input('k2')+$request->input('k3'))/3);
         $nilai = nilaiTema::find($id);
