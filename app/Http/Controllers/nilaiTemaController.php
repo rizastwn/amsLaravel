@@ -14,6 +14,8 @@ use App\Charts\nilaiTemaChart;
 use App\Charts\rataTema;
 use App\nilaiSubtema;
 use App\tema;
+use App\nilai;
+use App\subtema;
 use Illuminate\Support\Facades\Auth;
 
 class nilaiTemaController extends Controller
@@ -1454,8 +1456,16 @@ class nilaiTemaController extends Controller
      */
     public function create()
     {
-        
-        return view('tema.create');
+        $user = Auth::user();
+        $kelas = kelas::where([
+            ['idWaliKelas',$user->id],
+            ['kelas', $user->kelas],
+            ])->first();
+        $siswa= siswa::where('id',$kelas->idSiswa)->first();
+        $mataPelajaran = nilai::where([
+            ['kelas',$user->kelas]
+            ])->get();
+        return view('nilaiSubtema.create')->with(['siswa'=> $siswa,'mataPelajaran'=> $mataPelajaran,'kelas'=>$kelas]);
     }
 
     /**
@@ -1466,7 +1476,85 @@ class nilaiTemaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tema' => 'required',
+            'subtema' => 'required',
+            'mataPelajaran' => 'required',
+            'jenis' => 'required',
+            'nilai' => 'required',
+            'deskripsi' => 'required',
+            'fotoSubtema' => 'image|nullable|max:1999',
+        ]);
+        //handle file upload
+        if ($request->hasFile('fotoSubtema')) {
+            //get filename with extension
+            $filenameWithExt = $request->file('fotoSubtema')->getClientOriginalName();
+            //get just file name
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('fotoSubtema')->getClientOriginalExtension();
+            //filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            //upload Image
+            $path = $request->file('fotoSubtema')->storeAs('public/fotoSubtema', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        $user = Auth::user();
+        $kelas = kelas::where([
+            ['idWaliKelas',$user->id],
+            ['kelas', $user->kelas],
+            ])->first();
+
+        $nilai = new nilaiSubtema;
+        $nilai->idKelas= $kelas->id; 
+        $nilai->tema = $request->input('tema');
+        $nilai->subtema = $request->input('subtema');
+        $nilai->mataPelajaran = $request->input('mataPelajaran');
+        $nilai->jenis = $request->input('jenis');
+        $nilai->nilai = $request->input('nilai');
+        $nilai->deskripsi = $request->input('deskripsi');
+        $nilai->fotoHasil = $fileNameToStore;
+        $nilai->save();
+        
+        //menyimpan nilai subtema ke dalam nilai tema
+        $tema = nilaiTema::where([
+            ['idKelas',$kelas->id],
+            ['tema', $request->input('tema')],
+            ['mataPelajaran', $request->input('mataPelajaran')]
+        ])->first();
+        if ($request->input('subtema')=='1' && $request->input('jenis')=='pengetahuan') {
+            $tema->p1 = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='2' && $request->input('jenis')=='pengetahuan')
+        {
+            $tema->p2 = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='3' && $request->input('jenis')=='pengetahuan')
+        {
+            $tema->p3 = $request->input('nilai');
+        }
+        else if ($request->input('subtema')=='1' && $request->input('jenis')=='ketrampilan') {
+            $tema->k1 = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='2' && $request->input('jenis')=='ketrampilan')
+        {
+            $tema->k2  = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='3' && $request->input('jenis')=='ketrampilan')
+        {
+            $tema->k3 = $request->input('nilai');
+        }
+        //menghitung nilai rata rata tema
+        $pRata = ($tema->p3+$tema->p2+$tema->p1)/3;
+        $kRata = ($tema->k1+$tema->k2+$tema->k3)/3;
+        $tema->pRata = $pRata;
+        $tema->kRata = $kRata;
+        $tema->save();
+        return redirect('/daftarNilaiSubtema')->with('success', 'nilai subtema telah dibuat!');
+
+
     }
 
     /**
@@ -1510,11 +1598,89 @@ class nilaiTemaController extends Controller
     //untuk melihat nilai subtema siswa
     public function nilaiSubtema(Request $request, $id)
     {
-        $kelas = kelas::find($id);
+        if(request()->has('tema'))
+        {
+            $kelas = kelas::find($id);
+            $siswa = siswa::where('id',$kelas->idSiswa)->first();
+            $nilaiTema = nilaiSubtema::where([
+                ['idKelas',$kelas->id],
+                ['tema',$request->input('tema')],
+                ['jenis',$request->input('jenis')],
+                ['subtema',$request->input('subtema')],
+                ])->first();
+            $nilai = nilaiSubtema::where([
+                ['idKelas',$kelas->id],
+                ['tema',$request->input('tema')],
+                ['jenis',$request->input('jenis')],
+                ['subtema',$request->input('subtema')],
+                ])->get();
+        }else{
+            $kelas = kelas::find($id);
+            $siswa = siswa::where('id',$kelas->idSiswa)->first();
+            $nilaiTema = nilaiSubtema::where('idKelas',$kelas->id)->first();
+            $nilai = nilaiSubtema::where([
+                ['idKelas',$kelas->id],
+                ['tema','1'],
+                ['jenis','ketrampilan'],
+                ['subtema','1'],
+                ])->get();
+        }
+        
+        return view('nilaiSubtema.show')->with(['nilaiTema' => $nilaiTema,'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas]);
+    }
+
+    //melihat detail nilaiSubtema siswa
+    public function showSubtema($id)
+    {   
+        $nilaiSubtema = nilaiSubtema::find($id);
+        $kelas = kelas::where('id',$nilaiSubtema->idKelas)->first();
         $siswa = siswa::where('id',$kelas->idSiswa)->first();
-        $nilaiTema = nilaiSubtema::where('idKelas',$kelas->id)->first();
-        $nilai = nilaiSubtema::where('idKelas',$kelas->id)->get();
-        return view('tema.showSubtema')->with(['nilaiTema' => $nilaiTema,'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas]);
+        $subtema = subtema::where([
+            ['idKelas',$kelas->id],
+            ['tema',$nilaiSubtema->tema],
+            ['subtema',$nilaiSubtema->subtema],
+        ])->first();
+        return view('nilaiSubtema.show')->with(['subtema' => $subtema,'nilaiSubtema' => $nilaiSubtema, 'siswa' => $siswa,  'kelas' => $kelas]);
+    }
+
+    //melihat nilai subtema dari sisi wali murid
+    public function subtemaSiswa(Request $request)
+    {
+        $user = Auth::user();
+        $siswa = siswa::where('id',$user->idSiswa)->first();
+        $kelas = kelas::where([
+            ['idSiswa',$siswa->id],
+            ['kelas',$siswa->kelas]
+        ])->first();
+        if(request()->has('tema'))
+        {
+            
+            $siswa = siswa::where('id',$kelas->idSiswa)->first();
+            $nilaiTema = nilaiSubtema::where([
+                ['idKelas',$kelas->id],
+                ['tema',$request->input('tema')],
+                ['jenis',$request->input('jenis')],
+                ['subtema',$request->input('subtema')],
+                ])->first();
+            $nilai = nilaiSubtema::where([
+                ['idKelas',$kelas->id],
+                ['tema',$request->input('tema')],
+                ['jenis',$request->input('jenis')],
+                ['subtema',$request->input('subtema')],
+                ])->get();
+        }else{
+            
+            $siswa = siswa::where('id',$kelas->idSiswa)->first();
+            $nilaiTema = nilaiSubtema::where('idKelas',$kelas->id)->first();
+            $nilai = nilaiSubtema::where([
+                ['idKelas',$kelas->id],
+                ['tema','1'],
+                ['jenis','ketrampilan'],
+                ['subtema','1'],
+                ])->get();
+        }
+        
+        return view('nilaiSubtema.index')->with(['nilaiTema' => $nilaiTema,'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -1524,7 +1690,7 @@ class nilaiTemaController extends Controller
      */
     public function edit($id)
     {
-        $nilai = nilaiTema::find($id);
+        $nilai = nilaiSubtema::find($id);
         $kelas = kelas::find($nilai->idKelas);
         $siswa = siswa::find($kelas->idSiswa);
         $info = jadwal::where([
@@ -1533,7 +1699,11 @@ class nilaiTemaController extends Controller
             ['jenis', $nilai->tema]
         ])->first();
         $tanggal = date('Y-m-d');
-        return view('tema.edit')->with(['siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas, 'info' => $info, 'tanggal' => $tanggal]);
+        $subtema = subtema::where('tema',$nilai->tema)->first();
+        return view('tema.edit')->with([
+            'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas,
+             'info' => $info, 'tanggal' => $tanggal,'subtema'=>$subtema,
+             ]);
     }
 
     /**
@@ -1545,19 +1715,71 @@ class nilaiTemaController extends Controller
      */
     public function update(Request $request, $id)
     {  
-        $pRata = (($request->input('p1')+$request->input('p2')+$request->input('p3'))/3);
-        $kRata = (($request->input('k1')+$request->input('k2')+$request->input('k3'))/3);
-        $nilai = nilaiTema::find($id);
-        $nilai->p1 = $request->input('p1');
-        $nilai->k1 = $request->input('k1');
-        $nilai->p2 = $request->input('p2');
-        $nilai->k2 = $request->input('k2');
-        $nilai->p3 = $request->input('p3');
-        $nilai->k3 = $request->input('k3');
+        $this->validate($request, [
+            
+            'nilai' => 'required',
+            'deskripsi' => 'required',
+            'fotoSubtema' => 'image|nullable|max:1999',
+        ]);
+
+        $nilai =  nilaiSubtema::find($id);
+        $nilai->nilai = $request->input('nilai');
         $nilai->deskripsi = $request->input('deskripsi');
-        $nilai->kRata = $kRata;
-        $nilai->pRata = $pRata;
+        //handle file upload
+        if ($request->hasFile('fotoSubtema')) {
+            //get filename with extension
+            $filenameWithExt = $request->file('fotoSubtema')->getClientOriginalName();
+            //get just file name
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //get just ext
+            $extension = $request->file('fotoSubtema')->getClientOriginalExtension();
+            //filename to store
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            //upload Image
+            $path = $request->file('fotoSubtema')->storeAs('public/fotoSubtema', $fileNameToStore);
+            if ($request->hasFile('fotoSubtema')) {
+                Storage::delete('public/fotoSubtema/' . $nilai->fotoSubtema);
+            }
+            $nilai->fotoSubtema = $fileNameToStore;
+        }
         $nilai->save();
+
+        //menyimpan nilai subtema ke dalam nilai tema
+        $tema = nilaiTema::where([
+            ['idKelas',$nilai->idKelas],
+            ['tema', $nilai->tema],
+            ['mataPelajaran', $nilai->mataPelajaran]
+        ])->first();
+        if ($request->input('subtema')=='1' && $request->input('jenis')=='pengetahuan') {
+            $tema->p1 = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='2' && $request->input('jenis')=='pengetahuan')
+        {
+            $tema->p2 = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='3' && $request->input('jenis')=='pengetahuan')
+        {
+            $tema->p3 = $request->input('nilai');
+        }
+        else if ($request->input('subtema')=='1' && $request->input('jenis')=='ketrampilan') {
+            $tema->k1 = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='2' && $request->input('jenis')=='ketrampilan')
+        {
+            $tema->k2  = $request->input('nilai');
+        }
+        else if($request->input('subtema')=='3' && $request->input('jenis')=='ketrampilan')
+        {
+            $tema->k3 = $request->input('nilai');
+        }
+        //menghitung nilai rata rata tema
+        $pRata = ($tema->p3+$tema->p2+$tema->p1)/3;
+        $kRata = ($tema->k1+$tema->k2+$tema->k3)/3;
+        $tema->pRata = $pRata;
+        $tema->kRata = $kRata;
+        $tema->save();
+        return redirect('/daftarNilaiSubtema')->with('success', 'nilai subtema telah dibuat!');
+
         return redirect('/daftarNilaiTema')->with('success', 'nilai tema berhasil diubah!');
 
     }

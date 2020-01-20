@@ -22,6 +22,10 @@ Route::get('/nilaiRapot/lihat','nilaiRapotController@lihatNilai');
 Route::get('/jadwalAkademik/lihat','jadwalController@lihatJadwal');
 Route::get('/daftarTema/lihat','temaController@lihat');
 Route::get('/standarNilai/lihat','nilaiController@lihat');
+Route::get('/nilaiSubtema/lihat','nilaiTemaController@lihatNilai');
+Route::get('/nilaiSubtema/{nilaiTema}', 'nilaiTemaController@nilaiSubtema');
+Route::get('/lihatSubtema/{nilaiTema}', 'nilaiTemaController@showSubtema');
+Route::get('/nilaiSubtemaSiswa', 'nilaiTemaController@subtemaSiswa');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resources([
     'siswa' => 'siswaController',
@@ -45,7 +49,7 @@ Route::get('/daftarNilaiTema', 'nilaiTemaController@daftarNilaiTema');
 Route::get('/daftarNilaiUtsUas', 'nilaiUtsUasController@daftarNilaiUtsUas');
 Route::get('/daftarNilaiRapot', 'nilaiRapotController@daftarNilaiRapot');
 Route::get('/daftarNilaiSubtema', 'nilaiTemaController@daftarNilaiSubtema');
-Route::get('/nilaiSubTema/{nilaiTema}', 'nilaiTemaController@nilaiSubtema');
+
 
 
 

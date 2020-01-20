@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class=" card-header">
-        <h2>Buat Tema Baru Baru</h2> 
+        <h2>Buat Tema Baru </h2> 
         
     <div class="card-body">
         <form action="/daftarTema" method="POST" name="form1" enctype="multipart/form-data" >

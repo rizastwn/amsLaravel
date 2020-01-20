@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    h4{
-        color: black;
-    }
-    </style>
+
 <div class="card">
     
     <div class="card-header">
@@ -53,32 +49,8 @@
 
     </div>
     <div class="card-body">
-          <!-- Card header -->
-  <div class="card-header" role="tab" id="heading4">
-    <a data-toggle="collapse" data-parent="#accordionEx194" href="#collapse4" aria-expanded="true"
-      aria-controls="collapse4">
-      <h4 class="mb-0 red-text">
-       Statistik Nilai Tema <div class="animated-icon1 float-right mt-1"><span></span><span></span><span></span></div>
-      </h4>
-    </a>
-  </div>
 
-  <!-- Card body -->
-  <div id="collapse4" class="collapse show" role="tabpanel" aria-labelledby="heading4" data-parent="#accordionEx194">
-    <div class="card-body pt-0">
-        <h3>Grafik Perkembangan Nilai Siswa Semester {{$kelas->semester}}</h3>
-        {{-- script buat chart --}}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
-        {{ $nilaiTemaChart->script() }}
-        {{ $nilaiTemaChart->container()}}
-    </div>
-  </div>
 </div>
-<div class="card">
-    <div class="card-header">
-        <h3>Daftar Nilai Tema</h3>
-    </div>
-    <div class="card-body">
         <table class="table bordered">
             <thead>
                 <tr align="justify">
@@ -103,11 +75,7 @@
             
             
         </table>
-        
-    </div>
-
-</div>
-        
+        <br>
         
     </div>
    

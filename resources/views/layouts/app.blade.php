@@ -60,6 +60,11 @@
                             </a>
                         </li>
                         <li>
+                            <a href="/nilaiSubtemaSiswa">
+                                <i class="fa fa-book"></i> Nilai Subtema
+                            </a>
+                        </li>
+                        <li>
                             <a href="/nilaiUtsUas">
                                 <i class="fa fa-book"></i> Nilai UTS dan UAS
                             </a>

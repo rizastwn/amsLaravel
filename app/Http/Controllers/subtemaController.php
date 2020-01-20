@@ -15,15 +15,25 @@ class subtemaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         $user = Auth::user();
         $kelas = kelas::where('idWalikelas',$user->id)->first();
         $subtema = subtema::where([
+            ['tema', $request->input('tema')],
+            ['subtema', $request->input('subtema')],
+            ['jenis', $request->input('jenis')],
             ['idkelas',$kelas->id]
         ])->get();
-        return view('subtema.index')->with('subtema',$subtema);
-        // return view('subtema.index')->with(['nilai' => $nilai,'infonilai' => $infonilai ]);
+        $info = subtema::where([
+            ['tema', $request->input('tema')],
+            ['subtema', $request->input('subtema')],
+            ['jenis', $request->input('jenis')],
+            ['idkelas',$kelas->id]
+            ])->first();
+        
+        return view('subtema.index')->with(['info' => $info,'subtema' => $subtema, 'kelas' => $kelas]);
     }
 
     /**
@@ -89,7 +99,9 @@ class subtemaController extends Controller
      */
     public function show($id)
     {
-        return view('subtema.show');
+        $kelas = kelas::find($id);
+        $subtema = subtema::where('idKelas',$kelas->kelas);
+        return view('subtema.show')->with(['subtema' => $subtema, 'kelas' => $kelas]);
     }
 
     /**
