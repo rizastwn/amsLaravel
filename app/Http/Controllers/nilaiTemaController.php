@@ -1626,7 +1626,7 @@ class nilaiTemaController extends Controller
                 ])->get();
         }
         
-        return view('nilaiSubtema.show')->with(['nilaiTema' => $nilaiTema,'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas]);
+        return view('tema.showSubtema')->with(['nilaiTema' => $nilaiTema,'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas]);
     }
 
     //melihat detail nilaiSubtema siswa

@@ -60,6 +60,20 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+                color: #636b6f;
+            }
+            button{
+                background-color:#0000FF;
+                border-radius:28px;
+                border:1px solid #18ab29;
+                display:inline-block;
+                cursor:pointer;
+                color:#ffffff;
+                font-family:Arial;
+                font-size:17px;
+                padding:10px 20px;
+                text-decoration:none;
+                text-shadow:0px 1px 0px #2f6627;
             }
         </style>
     </head>
@@ -81,7 +95,7 @@
                                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
             
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            <input id="email" type="email" class="form-control" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -95,7 +109,7 @@
                                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
             
                                         <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                            <input id="password" type="password" class="form-control" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
             
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
