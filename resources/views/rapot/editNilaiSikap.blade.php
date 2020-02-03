@@ -12,11 +12,19 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="usr">Nilai Sikap Spiritual :</label>
-                <textarea class="form-control" rows="5" name="spritual" >{{$nilai->spritual}}</textarea>
+                <textarea class="form-control" rows="5" name="spritual" >{{$nilai->spiritual}}</textarea>
             </div>
             <div class="form-group">
                 <label for="usr">Nilai Sikap Sosial :</label>
                 <textarea class="form-control" rows="5" name="sosial" >{{$nilai->sosial}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="usr">Status Nilai Akhir Siswa :</label>
+                <select class="form-control" name="status" id="">
+                    <option value="naik kelas" @if ($kelas->status=='naik kelas') selected @endif>naik kelas</option>
+                    <option value="tinggal kelas" @if ($kelas->status=='tinggal kelas') selected @endif>tinggal kelas</option>
+                    <option value="proses pembelajaran" @if ($kelas->status=='proses pembelajaran') selected @endif>proses pembelajaran</option>                    
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan nilai</button>

@@ -1001,7 +1001,7 @@ class nilaiRapotController extends Controller
             ->count('nilaiKetrampilan');
         $mulokGenap = new rataTema;
         $mulokGenap->labels(['Lulus', 'Tidak Lulus']);
-        $mulokGenap->dataset('$nilai->mataPelajaran', 'pie', [$mulokUasTinggiGenap, $mulokUasRendahGenap]);
+        $mulokGenap->dataset( '$nilai->mataPelajaran', 'pie', [$mulokUasTinggiGenap, $mulokUasRendahGenap]);
 
         return view('rapot.daftarNilaiRapot')->with([
             'agamaGenap' => $agamaGenap,

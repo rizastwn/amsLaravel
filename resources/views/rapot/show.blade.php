@@ -2,22 +2,22 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h2>Daftar Nilai Rapot Siswa</h2>
+        <h2> Nilai Rapot Siswa</h2>
         <h4>Nama : {{$siswa->nama}}</h4>
         <h4>Kelas : {{$siswa->kelas}}</h4>
         <h4>Semester : {{$siswa->semester}}</h4>
-        <div class="row">
-            <div class=" col-md-2">
-                <a href="http://ams.com/nilaiRapot/{{$siswa->id}}?semester=ganjil" class="btn btn-info">nilai semester ganjil</a>
+        <div class=" col-md-8 row">
+            <div class="col-md-6">
+                <a href="/nilaiRapot/{{$siswa->id}}?semester=ganjil" class="btn btn-info">lihat nilai semester ganjil</a>
             </div>
-            <div class=" col-md-2">
-                <a href="http://ams.com/nilaiRapot/{{$siswa->id}}?semester=genap" class="btn btn-info">nilai semester genap</a>
+            <div class="col-md-6">
+                <a href="/nilaiRapot/{{$siswa->id}}?semester=genap" class="btn btn-info">lihat nilai semester genap</a>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <h4>Penilaian Sikap Sosial : <br> {{$sikap->sosial}}</h4>
-        <h4>Penilaian Sikap Spritual : <br> {{$sikap->spiritual}}</h4>
+        <h4>Penilaian Sikap Sosial : </h4> <h5> {{$sikap->sosial}}</h5>
+        <h4>Penilaian Sikap Spritual :</h4>  <h5> {{$sikap->spiritual}}</h5>
         <a href="/nilaiAkhirSikap/{{$sikap->id}}/edit" class="btn btn-info">Ubah Nilai Sikap</a>
     </div>
     <div class="card-body">

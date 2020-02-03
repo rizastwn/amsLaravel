@@ -60,13 +60,16 @@ class nilaiAkhirSikapController extends Controller
     public function edit($id)
     {
         $nilai = nilaiAkhirSikap::find($id);
+        $kelas = kelas::where([
+            ['id',$nilai->idKelas]
+            ])->first();
         $siswa = DB::table('siswas')
             ->join('kelas', 'kelas.idSiswa', '=', 'siswas.id')
             ->select('siswas.nama', 'kelas.*')
             ->where('kelas.id', $nilai->idKelas)
             ->first();
         
-        return view('rapot.editNilaiSikap')->with(['siswa' => $siswa, 'nilai' => $nilai, ]);
+        return view('rapot.editNilaiSikap')->with(['kelas' => $kelas, 'siswa' => $siswa, 'nilai' => $nilai, ]);
     }
 
     /**
@@ -82,6 +85,10 @@ class nilaiAkhirSikapController extends Controller
         $nilaiSikap->spritual = $request->input('spritual');
         $nilaiSikap->sosial = $request->input('sosial');
         $nilaiSikap->save();
+
+        $kelas = kelas::where('id',$nilaiSikap->idKelas)->first();
+        $kelas->status = $request->input('status');
+        $kelas->save();
         return redirect('/daftarNilaiRapot')->with('success', 'nilai rapot berhasil diubah!');
     }
 
