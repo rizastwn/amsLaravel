@@ -82,7 +82,10 @@
             <div class="content">
                   
                 <div class="title m-b-md">
-                    Aplikasi Monitoring Siswa YPAC Malang
+                    Aplikasi Monitoring Siswa
+                </div>
+                <div>
+                    <h1>Yayasan Pembinaan Anak Cacat Malang</h1>
                 </div>
                 
                 <div class="card">
@@ -92,7 +95,7 @@
                                     @csrf
             
                                     <div class="form-group row">
-                                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                        <label for="email" class="col-md-4 col-form-label ">{{ __('E-Mail') }}</label>
             
                                         <div class="col-md-6">
                                             <input id="email" type="email" class="form-control" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -106,7 +109,7 @@
                                     </div>
             
                                     <div class="form-group row">
-                                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                        <label for="password" class="col-md-4 col-form-label ">{{ __('Password') }}</label>
             
                                         <div class="col-md-6">
                                             <input id="password" type="password" class="form-control" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -132,6 +135,7 @@
                                     </div>
             
                                     <div class="form-group row mb-0">
+                                        <br>
                                         <div class="col-md-8 offset-md-4">
                                             <button type="submit" class="btn btn-info">
                                                 {{ __('Login') }}
@@ -143,7 +147,7 @@
                     @endguest
                     @auth
                     <div class="links">
-                        <h3><a href="/home">HOME</a></h3>
+                        <h3><a class="btn btn-info" href="/home">HOME</a></h3>
                     </div>
                     @endauth
                     
