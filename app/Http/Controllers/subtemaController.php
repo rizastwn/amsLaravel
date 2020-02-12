@@ -41,15 +41,36 @@ class subtemaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $user = Auth::user();
         $mataPelajaran = nilai::where([
             ['kelas',$user->kelas]
         ])->get();
-        return view('subtema.create')->with('mataPelajaran',$mataPelajaran);
+        $tema = $request->input('tema');
+        $jenis = $request->input('jenis');
+        $matpel = $request->input('mataPelajaran');
+        
+        if (request()->has('tema')) {
+            $subtema = subtema::where([
+                ['mataPelajaran', $request->input('mataPelajaran')],
+                ['tema', $request->input('tema')],
+                ['jenis', $request->input('jenis')],
+            ])->get();
+        }else{
+            $subtema = null;
+        }
+       
+        return view('subtema.create')->with([
+            'tema'=>$tema,
+            'jenis'=>$jenis,
+            'matpel'=>$matpel,
+            'subtema'=>$subtema,
+            'mataPelajaran' => $mataPelajaran,
+            ]);
     }
 
+   
     /**
      * Store a newly created resource in storage.
      *

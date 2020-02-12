@@ -82,7 +82,7 @@ class nilaiAkhirSikapController extends Controller
     public function update(Request $request, $id)
     {
         $nilaiSikap = nilaiAkhirSikap::find($id);
-        $nilaiSikap->spritual = $request->input('spritual');
+        $nilaiSikap->spiritual = $request->input('spiritual');
         $nilaiSikap->sosial = $request->input('sosial');
         $nilaiSikap->save();
 

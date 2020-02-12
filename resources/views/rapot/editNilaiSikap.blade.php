@@ -12,7 +12,7 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="usr">Nilai Sikap Spiritual :</label>
-                <textarea class="form-control" rows="5" name="spritual" >{{$nilai->spiritual}}</textarea>
+                <textarea class="form-control" rows="5" name="spiritual" >{{$nilai->spiritual}}</textarea>
             </div>
             <div class="form-group">
                 <label for="usr">Nilai Sikap Sosial :</label>
