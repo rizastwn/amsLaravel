@@ -1041,6 +1041,10 @@ class nilaiUtsUasController extends Controller
     {
         $user = Auth::user();
         $dataSiswa = siswa::find($user->idSiswa);
+        $kelasSiswa = kelas::where([
+            ['idSiswa','=',$dataSiswa->id],
+            ['semester','=','ganjil'],
+        ])->get();
         $kelas = kelas::where([
             ['idSiswa', '=', $dataSiswa->id],
             ['kelas', '=', $dataSiswa->kelas],
@@ -1050,12 +1054,16 @@ class nilaiUtsUasController extends Controller
             ['idKelas', $kelas->id],
         ])->get();
 
-        return view('uts.index')->with(['kelas' => $kelas, 'nilai' => $nilai]);
+        return view('uts.index')->with(['kelasSiswa' => $kelasSiswa,'kelas' => $kelas, 'nilai' => $nilai]);
     }
     public function lihatNilai(Request $request)
     {
         $user = Auth::user();
         $dataSiswa = siswa::find($user->idSiswa);
+        $kelasSiswa = kelas::where([
+            ['idSiswa','=',$dataSiswa->id],
+            ['semester','=','ganjil'],
+        ])->get();
         $kelas = kelas::where([
             ['idSiswa', '=', $dataSiswa->id],
             ['kelas', '=', $request->input('kelas')],
@@ -1064,7 +1072,7 @@ class nilaiUtsUasController extends Controller
         $nilai = nilaiUtsUas::where([
             ['idKelas', $kelas->id],
         ])->get();
-        return view('uts.index')->with(['kelas' => $kelas, 'nilai' => $nilai]);
+        return view('uts.index')->with(['kelasSiswa' => $kelasSiswa,'kelas' => $kelas, 'nilai' => $nilai]);
     }
     /**
      * Show the form for creating a new resource.

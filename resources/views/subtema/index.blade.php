@@ -13,7 +13,7 @@
     <h5>Jenis : {{$info->jenis}}</h5>
     @endif
     <a href="/subtema/create" class="btn btn-info">Tambah subtema baru</a><br><br>
-        <form action="/subtema" method="GET"  class="form-inline" role="form">
+        <form action="/subtema" method="GET"  class="row" role="form">
             {{ csrf_field() }}
             <div class="form-group col-md-2">
                 <label for="sel1">Tema :  </label>
@@ -40,7 +40,12 @@
                     <option value="ketrampilan" >Ketrampilan</option>
                 </select>
             </div> 
+            <div class="col">
+                <br>
                 <input type="submit" value="Cari" class="btn btn-info">
+            </div>
+            
+                
         </form>
  
     </div>

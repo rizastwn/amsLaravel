@@ -10,9 +10,9 @@
         <div class="form-group col-md-2">
             <label for="sel1">Kelas : </label>
             <select name="kelas"  class="form-control" id="sel1">
-                <option value="1" >1</option>
-                <option value="2">2</option>
-                <option value="3" >3</option>
+                @foreach ($kelasSiswa as $data)
+                <option @if ($data->kelas == $kelas->kelas) selected @endif value="{{$data->kelas}}" >{{$data->kelas}}</option>
+                @endforeach
             </select>
         </div>
         <div class="form-group col-md-3" >

@@ -251,7 +251,7 @@ class nilaiRapotController extends Controller
             ->where('nilai_akhirs.mataPelajaran', 'Mulok (Bahasa Jawa)')
             ->get()
             ->avg('nilaiPengetahuan');
-//chart nilai UAS genap
+        //chart nilai UAS genap
         $pagUASGenap = DB::table('nilai_akhirs')
             ->join('kelas', 'kelas.id', '=', 'nilai_akhirs.idKelas')
             ->select('nilai_akhirs.nilaiKetrampilan')
@@ -352,7 +352,7 @@ class nilaiRapotController extends Controller
             ->get()
             ->avg('nilaiKetrampilan');
 
-//chart nilai UAS ganjil
+        //chart nilai UAS ganjil
         $pagUASganjil = DB::table('nilai_akhirs')
             ->join('kelas', 'kelas.id', '=', 'nilai_akhirs.idKelas')
             ->select('nilai_akhirs.nilaiKetrampilan')
@@ -947,10 +947,7 @@ class nilaiRapotController extends Controller
         $pkbnGenap = new rataTema;
         $pkbnGenap->labels(['Lulus', 'Tidak Lulus']);
         $pkbnGenap->dataset('$nilai->mataPelajaran', 'pie', [$pkbnUasTinggiGenap, $pkbnUasRendahGenap]);
-        // $mataPelajaran = ['Pendidikan Agama dan Budi Pekerti', 'Pendidikan Pancasila dan Kewarganegaraan', 'Bahasa Indonesia'
-        //     , 'Matematika', 'Ilmu Pengetahuan Alam', 'Bahasa Inggris', 'Pendidikan Jasmani, Olah Raga, dan Kesehatan',
-        //     'Prakarya', 'Program Khusus (Bina Diri)', 'Mulok (Bahasa Jawa)'];
-
+        
         $nilai = nilai::where([
             ['mataPelajaran', 'Mulok (Bahasa Jawa)'],
             ['kelas', $user->kelas],
@@ -1039,6 +1036,10 @@ class nilaiRapotController extends Controller
     {
         $user = Auth::user();
         $dataSiswa = siswa::find($user->idSiswa);
+        $kelasSiswa = kelas::where([
+            ['idSiswa','=',$dataSiswa->id],
+            ['semester','=','ganjil'],
+        ])->get();
         $kelas = kelas::where([
             ['idSiswa', '=', $dataSiswa->id],
             ['kelas', '=', $dataSiswa->kelas],
@@ -1047,13 +1048,17 @@ class nilaiRapotController extends Controller
         $nilai = nilaiAkhir::where([
             ['idKelas', $kelas->id],
         ])->get();
-        return view('rapot.index')->with(['kelas' => $kelas, 'nilai' => $nilai]);
+        return view('rapot.index')->with(['kelasSiswa' => $kelasSiswa,'kelas' => $kelas, 'nilai' => $nilai]);
     }
 
     public function lihatNilai(Request $request)
     {
         $user = Auth::user();
         $dataSiswa = siswa::find($user->idSiswa);
+        $kelasSiswa = kelas::where([
+            ['idSiswa','=',$dataSiswa->id],
+            ['semester','=','ganjil'],
+        ])->get();
         $kelas = kelas::where([
             ['idSiswa', '=', $dataSiswa->id],
             ['kelas', '=', $request->input('kelas')],
@@ -1063,7 +1068,7 @@ class nilaiRapotController extends Controller
             ['idKelas', $kelas->id],
         ])->get();
 
-        return view('rapot.index')->with(['kelas' => $kelas, 'nilai' => $nilai]);
+        return view('rapot.index')->with(['kelasSiswa' => $kelasSiswa,'kelas' => $kelas, 'nilai' => $nilai]);
     }
     /**
      * Show the form for creating a new resource.

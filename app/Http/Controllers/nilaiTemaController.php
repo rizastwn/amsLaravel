@@ -930,6 +930,10 @@ class nilaiTemaController extends Controller
     {
         $user = Auth::user();
         $siswa = siswa::find($user->idSiswa);
+        $kelasSiswa = kelas::where([
+            ['idSiswa','=',$siswa->id],
+            ['semester','=','ganjil'],
+        ])->get();
         $kelas = kelas::where([
             ['idSiswa','=',$siswa->id],
             ['kelas','=',$siswa->kelas],
@@ -1173,6 +1177,7 @@ class nilaiTemaController extends Controller
             'nilaiTema' => $nilaiTema,
             'nilaiSikap' => $nilaiSikap,
             'judul' => $judul,
+            'kelasSiswa'=>$kelasSiswa
             ]);
 
     }
@@ -1180,6 +1185,10 @@ class nilaiTemaController extends Controller
     public function lihatNilai(Request $request){
         $user = Auth::user();
         $siswa = siswa::find($user->idSiswa);
+        $kelasSiswa = kelas::where([
+            ['idSiswa','=',$siswa->id],
+            ['semester','=','ganjil'],
+        ])->get();
         $kelas = kelas::where([
             ['idSiswa','=',$siswa->id],
             ['kelas','=',$request->input('kelas')],
@@ -1192,9 +1201,12 @@ class nilaiTemaController extends Controller
         $nilai = nilaiTema::where([
             ['idKelas',$kelas->id],
             ['tema',$request->input('tema')]
-        ])->avg('nilai_temas.pRata');
+        ])->get();
         $nilaiSikap = nilaiSikapSpritual::where([
             ['idKelas',$kelas->id],
+        ])->first();
+        $judul = tema::where([
+            ['tema',$nilaiTema->tema]
         ])->first();
         //mebuat chart
         $pag1 = nilaiTema::where([
@@ -1422,7 +1434,19 @@ class nilaiTemaController extends Controller
         $nilaiTemaChart->dataset('Program Khusus (Bina Diri)', 'line', [$pkbn1->pRata,$pkbn2->pRata,$pkbn3->pRata,$pkbn4->pRata]);
         $nilaiTemaChart->dataset('Mulok (Bahasa Jawa)', 'line', [$mulok1->pRata,$mulok2->pRata,$mulok3->pRata,$mulok4->pRata]);
         
-        return view('tema.index')->with(['nilaiTemaChart' => $nilaiTemaChart,'kelas' => $kelas, 'nilai' => $nilai,'nilaiTema' => $nilaiTema,'nilaiSikap' => $nilaiSikap]);
+
+        
+         
+        return view('tema.index')->with(
+            ['nilaiTemaChart' => $nilaiTemaChart,
+            'kelas' => $kelas,
+             'nilai' => $nilai,
+            'nilaiTema' => $nilaiTema,
+            'judul' => $judul,
+            'nilaiSikap' => $nilaiSikap,
+            'kelasSiswa' => $kelasSiswa,
+
+            ]);
     }
 
     public function daftarNilaiSubtema(Request $request)
