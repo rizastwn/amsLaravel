@@ -8,7 +8,7 @@
 
     <div class="row card-body ">
         <div class="col-md-4 col-sm-4">
-            <img class="img-circle" style="width: 100%" src="/profile/ayah.png" alt="">
+            <img class="img-circle" style="width: 100%" src="/storage/foto/{{$orangtua->foto}}" alt="">
         </div>
         <div class="col-md-6">
             <h2>Profil Orang Tua</h2>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\subtema;
-use Illuminate\Support\Facades\Auth;
 use App\kelas;
 use App\nilai;
+use App\nilaiSubtema;
+use App\subtema;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class subtemaController extends Controller
 {
@@ -17,23 +18,41 @@ class subtemaController extends Controller
      */
     public function index(Request $request)
     {
-        
         $user = Auth::user();
-        $kelas = kelas::where('idWalikelas',$user->id)->first();
+        if (request()->has('semester')) {
+            $kelas = kelas::where([
+                ['idWalikelas', $user->id],
+                ['kelas', $user->kelas],
+                ['semester', $request->input('semester')],
+            ])->first();
+        } else {
+            $kelas = kelas::where([
+                ['idWalikelas', $user->id],
+                ['kelas', $user->kelas],
+                ['semester', 'ganjil'],
+            ])->first();
+        };
+
         $subtema = subtema::where([
             ['tema', $request->input('tema')],
             ['subtema', $request->input('subtema')],
             ['jenis', $request->input('jenis')],
-            ['idkelas',$kelas->id]
+            ['idkelas', $kelas->id],
         ])->get();
-        $info = subtema::where([
-            ['tema', $request->input('tema')],
-            ['subtema', $request->input('subtema')],
-            ['jenis', $request->input('jenis')],
-            ['idkelas',$kelas->id]
-            ])->first();
-        
-        return view('subtema.index')->with(['info' => $info,'subtema' => $subtema, 'kelas' => $kelas]);
+
+        $tema = $request->input('tema');
+        $subtemaD =  $request->input('subtema');
+        $jenis = $request->input('jenis');
+        $semester =  $request->input('semester');
+        return view('subtema.index')
+            ->with([
+                'subtema' => $subtema,
+                'kelas' => $kelas,
+                'tema'=> $tema,
+                'subtemaD'=> $subtemaD,
+                'jenis'=> $jenis,
+                'semester'=> $semester,
+                ]);
     }
 
     /**
@@ -45,32 +64,32 @@ class subtemaController extends Controller
     {
         $user = Auth::user();
         $mataPelajaran = nilai::where([
-            ['kelas',$user->kelas]
+            ['kelas', $user->kelas],
         ])->get();
         $tema = $request->input('tema');
         $jenis = $request->input('jenis');
         $matpel = $request->input('mataPelajaran');
-        
+        $semester = $request->input('semester');
         if (request()->has('tema')) {
             $subtema = subtema::where([
                 ['mataPelajaran', $request->input('mataPelajaran')],
                 ['tema', $request->input('tema')],
                 ['jenis', $request->input('jenis')],
             ])->get();
-        }else{
+        } else {
             $subtema = null;
         }
-       
+
         return view('subtema.create')->with([
-            'tema'=>$tema,
-            'jenis'=>$jenis,
-            'matpel'=>$matpel,
-            'subtema'=>$subtema,
+            'tema' => $tema,
+            'jenis' => $jenis,
+            'matpel' => $matpel,
+            'subtema' => $subtema,
             'mataPelajaran' => $mataPelajaran,
-            ]);
+            'semester' => $semester,
+        ]);
     }
 
-   
     /**
      * Store a newly created resource in storage.
      *
@@ -79,16 +98,17 @@ class subtemaController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'tema' => 'required',
             'subtema' => 'required',
             'jenis' => 'required',
             'judul' => 'required',
             'jenis' => 'required',
-            'tanggalAwal' => 'required',  
-            'tanggalAkhir' => 'required', 
-            'deskripsi' => 'required', 
-            'mataPelajaran' => 'required', 
+            'tanggalAwal' => 'required',
+            'tanggalAkhir' => 'required',
+            'deskripsi' => 'required',
+            'mataPelajaran' => 'required',
         ]);
 
         //mencari id kelas
@@ -96,6 +116,7 @@ class subtemaController extends Controller
         $kelas = kelas::where([
             ['idWaliKelas', $user->id],
             ['kelas', $user->kelas],
+            ['semester', $request->input('semester') ],
         ])->first();
 
         $subtema = new subtema;
@@ -109,6 +130,22 @@ class subtemaController extends Controller
         $subtema->tanggalAkhir = $request->input('tanggalAkhir');
         $subtema->deskripsi = $request->input('deskripsi');
         $subtema->save();
+
+        // mencari seluruh siswa dalam kelas
+        $kelasSiswa = kelas::where([
+            ['idWaliKelas',$kelas->idWaliKelas],
+            ['semester',$request->input('semester')]
+        ])->get();
+
+        foreach ($kelasSiswa as $data) {
+            $nilaiSubtema = new nilaiSubtema;
+            $nilaiSubtema->idKelas = $data->id;
+            $nilaiSubtema->tema = $request->input('tema');
+            $nilaiSubtema->subtema = $request->input('subtema');
+            $nilaiSubtema->jenis = $request->input('jenis');
+            $nilaiSubtema->mataPelajaran = $request->input('mataPelajaran');
+            $nilaiSubtema->save();
+        }
         return redirect('/subtema')->with('success', 'subtema baru telah dibuat!');
     }
 
@@ -120,8 +157,8 @@ class subtemaController extends Controller
      */
     public function show($id)
     {
-        $kelas = kelas::find($id);
-        $subtema = subtema::where('idKelas',$kelas->kelas);
+        $subtema = subtema::find($id);
+        $kelas = kelas::where('id', $subtema->idKelas)->first();
         return view('subtema.show')->with(['subtema' => $subtema, 'kelas' => $kelas]);
     }
 
@@ -135,7 +172,7 @@ class subtemaController extends Controller
     {
         $user = Auth::user();
         $mataPelajaran = nilai::where([
-            ['kelas',$user->kelas]
+            ['kelas', $user->kelas],
         ])->get();
         $subtema = subtema::find($id);
         return view('subtema.edit')->with(['subtema' => $subtema, 'mataPelajaran' => $mataPelajaran]);
@@ -156,10 +193,10 @@ class subtemaController extends Controller
             'jenis' => 'required',
             'judul' => 'required',
             'jenis' => 'required',
-            'tanggalAwal' => 'required',  
-            'tanggalAkhir' => 'required', 
-            'deskripsi' => 'required', 
-            'mataPelajaran' => 'required', 
+            'tanggalAwal' => 'required',
+            'tanggalAkhir' => 'required',
+            'deskripsi' => 'required',
+            'mataPelajaran' => 'required',
         ]);
 
         //mencari id kelas
@@ -169,7 +206,7 @@ class subtemaController extends Controller
             ['kelas', $user->kelas],
         ])->first();
 
-        $subtema =  subtema::find($id);
+        $subtema = subtema::find($id);
         $subtema->idKelas = $kelas->id;
         $subtema->tema = $request->input('tema');
         $subtema->subtema = $request->input('subtema');
@@ -180,7 +217,7 @@ class subtemaController extends Controller
         $subtema->tanggalAkhir = $request->input('tanggalAkhir');
         $subtema->deskripsi = $request->input('deskripsi');
         $subtema->save();
-        return redirect('/subtema')->with('success', 'subtema baru telah dibuat!');
+        return redirect('/subtema')->with('success', 'subtema telah diubah!');
     }
 
     /**

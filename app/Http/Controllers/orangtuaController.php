@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class orangtuaController extends Controller
 {
@@ -57,12 +58,7 @@ class orangtuaController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $orangtua = DB::table('siswas')
-            ->join('users', 'users.idSiswa', '=', 'siswas.id')
-            ->select('users.*', 'siswas.nama', 'siswas.kelas')
-            ->where('users.id', '=', $user->id)
-            ->where('users.status', 'aktif')
-            ->first();
+        $orangtua = User::where('id',$user->id)->first();
         return view('orangtua.show')->with('orangtua', $orangtua);
     }
 
@@ -115,11 +111,11 @@ class orangtuaController extends Controller
             //get just ext
             $extension = $request->file('fotoAyah')->getClientOriginalExtension();
             //filename to store
-            $fotoAyah = $filename . '_' . time() . '.' . $extension;
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //upload Image
-            $path = $request->file('fotoAyah')->storeAs('public/foto', $fotoAyah);
+            $pathAyah = $request->file('fotoAyah')->storeAs('public/foto', $fileNameToStore);
         } else {
-            $fotoAyah = 'noimage.jpg';
+            $fileNameToStore = 'noimage.jpg';
         }
         $passAyah = Hash::make($request->input('passwordAyah'));
         $role = 'orang tua';
@@ -135,7 +131,7 @@ class orangtuaController extends Controller
         $ayah->tanggalLahir = $request->input('tanggalLahirAyah');
         $ayah->role = $role;
         $ayah->status = $status;
-        $ayah->foto = $path;
+        $ayah->foto = $pathAyah;
         $ayah->save();
 
         // menyimpan data ibu
@@ -148,11 +144,11 @@ class orangtuaController extends Controller
             //get just ext
             $extension = $request->file('fotoIbu')->getClientOriginalExtension();
             //filename to store
-            $fotoIbu = $filename . '_' . time() . '.' . $extension;
+            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
             //upload Image
-            $path = $request->file('fotoIbu')->storeAs('public/foto', $fotoIbu);
+            $pathIbu = $request->file('fotoIbu')->storeAs('public/foto', $fileNameToStore);
         } else {
-            $fotoIbu = 'noimage.jpg';
+            $fileNameToStore = 'noimage.jpg';
         }
         $passIbu = Hash::make($request->input('passwordIbu'));
         $ibu = new User;
@@ -166,7 +162,7 @@ class orangtuaController extends Controller
         $ibu->tanggalLahir = $request->input('tanggalLahirIbu');
         $ibu->role = $role;
         $ibu->status = $status;
-        $ibu->foto = $fotoIbu;
+        $ibu->foto = $pathIbu;
         $ibu->save();
 
         $siswa = siswa::find($request->input('idSiswa'));

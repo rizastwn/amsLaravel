@@ -5,7 +5,7 @@
     <div class="card-header">
     <h2>Deskripsi Kegiatan</h2>
     <h4>Mata Pelajaran : {{$subtema->mataPelajaran}}</h4>
-    <h4>Semester :  {{$kelas->kelas}}</h4>
+    <h4>Semester :  {{$kelas->semester}}</h4>
     <h4>Tema :  {{$subtema->tema}}</h4>
     <h4>Subtema :  {{$subtema->subtema}}</h4>
     </div>

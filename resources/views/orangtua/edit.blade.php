@@ -46,16 +46,16 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Upload Foto Ayah:</span>
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload Foto:</span>
                 </div>
                 <div class="custom-file ">
-                    <input name="fotoAyah" type="file" class="custom-file-input"
+                    <input name="foto" type="file" class="custom-file-input"
                         aria-describedby="inputGroupFileAddon01">
                     <label class="custom-file-label" for="inputGroupFile01">Pilih Gambar</label>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan pengumuman</button>
+        <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan data</button>
         <form method="post">
             <input type="hidden" name="_method" value="put" />
         </form></div>

@@ -4,45 +4,46 @@
 <div class="card">
     <div class="card-header">
     <h2>Rancangan Subtema</h2>
-    @if ($info==null)
-        <h4>Silahkan menggunakan form pencarian</h4>
-    @else
     
-    <h5>Tema : {{$info->tema}}</h5>
-    <h5>Tema : {{$info->subtema}}</h5>
-    <h5>Jenis : {{$info->jenis}}</h5>
-    @endif
     <a href="/subtema/create" class="btn btn-info">Tambah subtema baru</a><br><br>
         <form action="/subtema" method="GET"  class="row" role="form">
             {{ csrf_field() }}
             <div class="form-group col-md-2">
                 <label for="sel1">Tema :  </label>
                 <select name="tema"  class="form-control" id="sel1">
-                    <option value="1" >1</option>
-                    <option value="2" >2</option>
-                    <option value="3" >3</option>
-                    <option value="3"  >4</option>
+                    <option @if ($tema == 1) selected @endif value="1" >1</option>
+                    <option @if ($tema == 2) selected @endif value="2" >2</option>
+                    <option @if ($tema == 3) selected @endif value="3" >3</option>
+                    <option @if ($tema == 4) selected @endif value="3"  >4</option>
                 </select>
             </div>
             <div class="form-group col-md-3" >
                 <label for="sel1">Subtema :  </label>
                 <select name="subtema" class="form-control" id="sel1">
-                    <option value="1">1</option>
-                    <option value="2" >2</option>
-                    <option value="3" >3</option>
+                    <option @if ($subtemaD == 1) selected @endif value="1">1</option>
+                    <option @if ($subtemaD == 2) selected @endif value="2" >2</option>
+                    <option @if ($subtemaD == 3) selected @endif value="3" >3</option>
+                    <option @if ($subtemaD== 4) selected @endif value="3" >4</option>
                     
                 </select>
             </div>
             <div class="form-group col-md-3" >
                 <label for="sel1">Jenis :  </label>
                 <select name="jenis" class="form-control" id="sel1">
-                    <option value="pengetahuan">Pengetahuan</option>
-                    <option value="ketrampilan" >Ketrampilan</option>
+                    <option @if ($jenis == 'pengetahuan') selected @endif  value="pengetahuan">Pengetahuan</option>
+                    <option @if ($jenis == 'ketrampilan') selected @endif value="ketrampilan" >Ketrampilan</option>
                 </select>
             </div> 
+            <div class="form-group col-md-3" >
+                <label for="sel1">Semester :  </label>
+                <select name="semester" class="form-control" id="sel1">
+                    <option @if ($semester == 'ganjil') selected @endif value="ganjil">Ganjil</option>
+                    <option  @if ($semester == 'genap') selected @endif value="genap" >Genap</option>
+                </select>
+            </div>
             <div class="col">
                 <br>
-                <input type="submit" value="Cari" class="btn btn-info">
+                <input type="submit" value="Cari Tema" class="btn btn-info">
             </div>
             
                 
@@ -67,9 +68,10 @@
                     <td>{{$item->judul}}</td>
                     <td>{{$item->deskripsi}}</td>
                     <td >
-                        <form action="{{action('subtemaController@destroy', $item['id'])}}" method="post">
+                        <form  action="{{action('subtemaController@destroy', $item['id'])}}" method="post">
                             @csrf
                             <a href="/subtema/{{$item->id}}" class="btn btn-info">Lihat </a> <br>
+                            <a href="/subtema/{{$item->id}}/edit" class="btn btn-info">Ubah </a> 
                             <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger" type="submit">Hapus</button>
                           </form>
