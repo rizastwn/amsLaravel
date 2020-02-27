@@ -41,7 +41,7 @@
                 </select>
             </div>
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary" id="Submit" name="Submit">Cari Data Tema</button>
+                <button type="submit" class="btn btn-primary" id="Submit" name="Submit">Cek Subtema</button>
             </div>
         </form>
     </div>

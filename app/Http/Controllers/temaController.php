@@ -12,29 +12,37 @@ class temaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tema = tema::where([
-            ['kelas','1'],
-            ['semester','ganjil']
+            ['kelas', '1'],
+            ['semester', 'ganjil'],
         ])->get();
-        $infotema =  tema::where([
-            ['kelas','1'],
-            ['semester','ganjil']
-        ])->first();
-        return view('penjelasanTema.index')->with(['tema' => $tema,'infotema' => $infotema ]);
+        $semester = $request->input('semester');
+        $kelas = $request->input('kelas');
+        return view('penjelasanTema.index')
+            ->with(
+                [
+                    'tema' => $tema,
+                    'kelas' => $kelas,
+                    'semester' => $semester,
+                ]);
     }
     public function lihat(Request $request)
     {
         $tema = tema::where([
-            ['kelas',$request->input('kelas')],
-            ['semester',$request->input('semester')]
+            ['kelas', $request->input('kelas')],
+            ['semester', $request->input('semester')],
         ])->get();
-        $infotema =  tema::where([
-            ['kelas',$request->input('kelas')],
-            ['semester',$request->input('semester')]
-        ])->first();
-        return view('penjelasanTema.index')->with(['tema' => $tema,'infotema' => $infotema ]);
+        $semester = $request->input('semester');
+        $kelas = $request->input('kelas');
+        return view('penjelasanTema.index')
+            ->with(
+                [
+                    'tema' => $tema,
+                    'kelas' => $kelas,
+                    'semester' => $semester,
+                ]);
     }
 
     /**
@@ -42,9 +50,15 @@ class temaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('penjelasanTema.create');
+        $semester = $request->input('semester');
+        $kelas = $request->input('kelas');
+        return view('penjelasanTema.create')->with(
+            [
+                'kelas' => $kelas,
+                'semester' => $semester,
+            ]);
     }
 
     /**
@@ -60,7 +74,7 @@ class temaController extends Controller
             'kelas' => 'required',
             'semester' => 'required',
             'judul' => 'required',
-            'isi' => 'required',            
+            'isi' => 'required',
         ]);
         $tema = new tema;
         $tema->tema = $request->input('tema');
@@ -92,7 +106,7 @@ class temaController extends Controller
     public function edit($id)
     {
         $tema = tema::find($id);
-        return view('penjelasanTema.edit')->with(['tema' => $tema ]);
+        return view('penjelasanTema.edit')->with(['tema' => $tema]);
     }
 
     /**
@@ -109,9 +123,9 @@ class temaController extends Controller
             'kelas' => 'required',
             'semester' => 'required',
             'judul' => 'required',
-            'isi' => 'required',            
+            'isi' => 'required',
         ]);
-        $tema =  tema::find($id);
+        $tema = tema::find($id);
         $tema->tema = $request->input('tema');
         $tema->kelas = $request->input('kelas');
         $tema->semester = $request->input('semester');

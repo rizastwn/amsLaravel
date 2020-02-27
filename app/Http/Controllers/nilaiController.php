@@ -12,29 +12,37 @@ class nilaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $nilai = nilai::where([
-            ['kelas','1'],
-            ['semester','ganjil']
+            ['kelas', '1'],
+            ['semester', 'ganjil'],
         ])->get();
-        $infonilai =  nilai::where([
-            ['kelas','1'],
-            ['semester','ganjil']
-        ])->first();
-        return view('nilai.index')->with(['nilai' => $nilai,'infonilai' => $infonilai ]);
+        $semester = $request->input('semester');
+        $kelas = $request->input('kelas');
+        return view('nilai.index')
+            ->with(
+                [
+                    'nilai' => $nilai,
+                    'kelas' => $kelas,
+                    'semester' => $semester,
+                ]);
     }
     public function lihat(Request $request)
     {
         $nilai = nilai::where([
-            ['kelas',$request->input('kelas')],
-            ['semester',$request->input('semester')]
+            ['kelas', $request->input('kelas')],
+            ['semester', $request->input('semester')],
         ])->get();
-        $infonilai =  nilai::where([
-            ['kelas',$request->input('kelas')],
-            ['semester',$request->input('semester')]
-        ])->first();
-        return view('nilai.index')->with(['nilai' => $nilai,'infonilai' => $infonilai ]);
+        $semester = $request->input('semester');
+        $kelas = $request->input('kelas');
+        return view('nilai.index')
+            ->with(
+                [
+                    'nilai' => $nilai,
+                    'kelas' => $kelas,
+                    'semester' => $semester,
+                ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -58,15 +66,16 @@ class nilaiController extends Controller
             'kelas' => 'required',
             'semester' => 'required',
             'mataPelajaran' => 'required',
-            'nilai' => 'required',            
+            'nilai' => 'required',
         ]);
-       
-        $tema = new tema;
-        $tema->kelas = $request->input('kelas');
-        $tema->semester = $request->input('semester');
-        $tema->mataPelajaran = $request->input('mataPelajaran');
-        $tema->nilai = $request->input('nilai');
-        $tema->save();
+
+        $nilai = new nilai;
+        $nilai->kelas = $request->input('kelas');
+        $nilai->semester = $request->input('semester');
+        $nilai->mataPelajaran = $request->input('mataPelajaran');
+        $nilai->nilai = rand(60, 70);
+        $nilai->save();
+
         return redirect('/standarNilai')->with('success', 'nilai baru telah dibuat!');
     }
 
@@ -90,7 +99,7 @@ class nilaiController extends Controller
     public function edit($id)
     {
         $nilai = nilai::find($id);
-        return view('nilai.edit')->with(['nilai' => $nilai ]);
+        return view('nilai.edit')->with(['nilai' => $nilai]);
     }
 
     /**
@@ -106,7 +115,7 @@ class nilaiController extends Controller
             'kelas' => 'required',
             'semester' => 'required',
             'mataPelajaran' => 'required',
-            'nilai' => 'required',            
+            'nilai' => 'required',
         ]);
         $tema = tema::find($id);
         $tema->kelas = $request->input('kelas');

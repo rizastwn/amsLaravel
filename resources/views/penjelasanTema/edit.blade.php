@@ -5,7 +5,7 @@
         <h2>Ubah Penjelasan tema </h2> 
         
     <div class="card-body">
-        <form action="/daftartema/{{$tema->id}}" method="POST" name="form1" enctype="multipart/form-data" >
+        <form action="/daftarTema/{{$tema->id}}" method="POST" name="form1" enctype="multipart/form-data" >
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="usr">Tema :</label>

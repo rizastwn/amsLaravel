@@ -97,6 +97,7 @@ class kelasController extends Controller
             ['kelas',$siswa->kelas]
         ])
         ->first();
+
         $kelasLamaGanjil->status = 'lulus';
         $kelasLamaGanjil->save();
         $kelasLamaGenap = kelas::where([
@@ -106,6 +107,7 @@ class kelasController extends Controller
             ['kelas',$siswa->kelas]
         ])
         ->first();
+
         $kelasLamaGenap->status = 'lulus';
         $kelasLamaGenap->save();
        
@@ -135,6 +137,7 @@ class kelasController extends Controller
         'Prakarya', 'Program Khusus (Bina Diri)', 'Mulok (Bahasa Jawa)'];
 
         $tema = ['1', '2', '3', '4'];
+        
         //nilai Tema semester ganjil
 
         if (is_array($tema) || is_object($tema)) {

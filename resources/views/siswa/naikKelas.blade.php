@@ -10,16 +10,24 @@
     <div class="card-body">
         <form action="/naikKelas/{{$siswa->id}}" method="POST" name="form1" enctype="multipart/form-data" >
             {{ csrf_field() }}
-            
-            <div class="form-group">
+           
+                
+            @if ($kelas->status == 'proses pembelajaran') 
+            siswa masih dalam proses pendidikan!
+            @else
+             
+            <div  class="form-group">
                 <label for="usr">Kelas Baru  :</label>
                 <input type="number" min="1" max="3" class="form-control" name="kelas" value="{{$siswa->kelas}}">
                 <br>
+            </div>
+           
             <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan data</button>
         
             <form method="post">
             <input type="hidden" name="_method" value="put" />
         </form>
+        @endif
         </form>
     </div>
 

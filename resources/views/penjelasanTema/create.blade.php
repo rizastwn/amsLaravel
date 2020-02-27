@@ -9,7 +9,12 @@
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="usr">Tema :</label>
-                <input type="number" class="form-control" name="tema" value="">
+                <select class="form-control" name="tema" id="">
+                    <option value="1" > 1</option>
+                    <option value="2" @if ($kelas == '2') selected @endif> 2</option>
+                    <option value="3" @if ($kelas == '3') selected @endif> 3</option>
+                    <option value="4" @if ($kelas == '4') selected @endif> 4</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="usr">kelas :</label>
