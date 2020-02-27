@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="usr">Penjelasan  subTema:</label>
-                <textarea class="form-control" name="deskripsi" id="" cols="30" rows="10">{{$subtema->deskripsi}}</textarea>
+                <textarea class="form-control" name="deskripsi" id="article-ckeditor" cols="30" rows="10">{{$subtema->deskripsi}}</textarea>
             </div>
             <div class="form-group">
                 <label for="usr">Tanggal Mulai :</label>

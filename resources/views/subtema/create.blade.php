@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header">
         <h1>Membuat Rancangan Subtema Baru</h1>
-        <h5>Sebelum membuat rancangan subtema diharuskan untuk mencari mata pelajaran dan tema yang akan dibuat</h5>
+        <h5>Sebelum membuat rancangan subtema diharuskan untuk mengecek mata pelajaran dan tema yang akan dibuat</h5>
     </div>
     <div class="card-body ">
         <form action="/subtema/create" method="GET" class="row">
@@ -91,7 +91,7 @@
             </div>
             <div class="form-group">
                 <label for="usr">Penjelasan  subTema:</label>
-                <textarea class="form-control" name="deskripsi" id="" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="deskripsi" id="article-ckeditor" cols="30" rows="10"></textarea>
             </div>
             <div class="form-group">
                 <label for="usr">Tanggal Mulai :</label>

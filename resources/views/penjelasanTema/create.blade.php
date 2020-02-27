@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="usr">Tujuan Tema:</label>
-                <textarea class="form-control" name="isi" id="" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="isi" id="article-ckeditor" cols="30" rows="10"></textarea>
             </div>
             
             <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan data siswa</button>

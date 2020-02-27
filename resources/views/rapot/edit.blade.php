@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="usr">Nilai Sikap Sosial :</label>
-                <textarea class="form-control" rows="5" name="sosial" >{{$sikap->sosial}}</textarea>
+                <textarea class="form-control" rows="5" name="sosial"  >{{$sikap->sosial}}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan nilai</button>
