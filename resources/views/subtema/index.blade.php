@@ -17,7 +17,7 @@
                     <option @if ($tema == 4) selected @endif value="3"  >4</option>
                 </select>
             </div>
-            <div class="form-group col-md-3" >
+            <div class="form-group col-md-2" >
                 <label for="sel1">Subtema :  </label>
                 <select name="subtema" class="form-control" id="sel1">
                     <option @if ($subtemaD == 1) selected @endif value="1">1</option>
@@ -41,7 +41,7 @@
                     <option  @if ($semester == 'genap') selected @endif value="genap" >Genap</option>
                 </select>
             </div>
-            <div class="col">
+            <div class="col-md-2">
                 <br>
                 <input type="submit" value="Cari Tema" class="btn btn-info">
             </div>
@@ -57,7 +57,6 @@
                 <tr >
                 <th scope="col">Mata Pelajaran</th>
                 <th scope="col">Judul</th>
-                <th scope="col">Deskripsi</th>
                 <th scope="col">Menu</th>
                 </tr>
             </thead>
@@ -66,14 +65,12 @@
                 <tr >
                     <td>{{$item->mataPelajaran}}</td>
                     <td>{{$item->judul}}</td>
-                    <td>{{$item->deskripsi}}</td>
-                    <td >
+                    <td align="">
                         <form  action="{{action('subtemaController@destroy', $item['id'])}}" method="post">
                             @csrf
-                            <a href="/subtema/{{$item->id}}" class="btn btn-info">Lihat </a> <br>
+                            <a href="/subtema/{{$item->id}}" class="btn btn-success">Lihat </a> 
                             <a href="/subtema/{{$item->id}}/edit" class="btn btn-info">Ubah </a> 
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger" type="submit">Hapus</button>
+                            
                           </form>
                     </td>
                 </tr>

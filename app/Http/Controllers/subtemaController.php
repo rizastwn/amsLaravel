@@ -6,6 +6,7 @@ use App\kelas;
 use App\nilai;
 use App\nilaiSubtema;
 use App\subtema;
+use App\tema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,16 +63,34 @@ class subtemaController extends Controller
      */
     public function create(Request $request)
     {
+
         $user = Auth::user();
         $mataPelajaran = nilai::where([
             ['kelas', $user->kelas],
+            ['semester', 'genap'],
         ])->get();
+        $temaKelas = tema::where([
+            ['kelas', $user->kelas],
+            ['semester', 'ganjil']
+            
+        ])->get();
+        $kelas = kelas::where([
+            ['idWaliKelas',$user->id],
+            ['kelas',$user->kelas],
+            ['tahunAjaran', date("Y") ],
+            ['semester', $request->input('semester')]
+        ])->first();
         $tema = $request->input('tema');
         $jenis = $request->input('jenis');
         $matpel = $request->input('mataPelajaran');
         $semester = $request->input('semester');
         if (request()->has('tema')) {
+            $temaKelas = tema::where([
+                ['kelas', $user->kelas],
+               ['semester',$kelas->semester]
+            ])->get();
             $subtema = subtema::where([
+                ['idKelas',$kelas->id],
                 ['mataPelajaran', $request->input('mataPelajaran')],
                 ['tema', $request->input('tema')],
                 ['jenis', $request->input('jenis')],
@@ -81,6 +100,7 @@ class subtemaController extends Controller
         }
 
         return view('subtema.create')->with([
+            'temaKelas' => $temaKelas,
             'tema' => $tema,
             'jenis' => $jenis,
             'matpel' => $matpel,
@@ -158,8 +178,11 @@ class subtemaController extends Controller
     public function show($id)
     {
         $subtema = subtema::find($id);
+        $tema = tema::where([
+            ['tema' , $subtema->tema]
+        ])->first();
         $kelas = kelas::where('id', $subtema->idKelas)->first();
-        return view('subtema.show')->with(['subtema' => $subtema, 'kelas' => $kelas]);
+        return view('subtema.show')->with(['tema' => $tema,'subtema' => $subtema, 'kelas' => $kelas]);
     }
 
     /**

@@ -7,7 +7,7 @@
     <div class="row card-body">
         <div class="col-md-4 col-sm-4">
             
-            <img class="img-circle" style="width: 100%" src="/storage/fotoUser/{{$orangtua->foto}}" alt="">
+            <img class="img-circle" style="width: 100%" src="/storage/foto/{{$orangtua->foto}}" alt="">
         </div>
         <div class="col-sm">
             <h5>Nama : {{$orangtua->name}}</h5>

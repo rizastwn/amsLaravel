@@ -28,11 +28,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="usr">Mata Pelajaran :</label>
+                <label for="usr">Mata Pelajaran  :</label>
                 <select class="form-control" name="mataPelajaran">
                     @foreach ($mataPelajaran as $item)
-                <option value="{{$item->mataPelajaran}}">{{$item->mataPelajaran}}</option>
-                @endforeach   
+                    <option value="{{$item->mataPelajaran}}">{{$item->mataPelajaran}}</option>
+                    @endforeach   
                 </select>  
             </div>
             <div class="form-group">

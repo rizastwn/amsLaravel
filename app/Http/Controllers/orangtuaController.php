@@ -111,9 +111,9 @@ class orangtuaController extends Controller
             //get just ext
             $extension = $request->file('fotoAyah')->getClientOriginalExtension();
             //filename to store
-            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+            $fileNameToStoreAyah = $filename . '_' . time() . '.' . $extension;
             //upload Image
-            $pathAyah = $request->file('fotoAyah')->storeAs('public/foto', $fileNameToStore);
+            $pathAyah = $request->file('fotoAyah')->storeAs('public/foto', $fileNameToStoreAyah);
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -131,7 +131,7 @@ class orangtuaController extends Controller
         $ayah->tanggalLahir = $request->input('tanggalLahirAyah');
         $ayah->role = $role;
         $ayah->status = $status;
-        $ayah->foto = $pathAyah;
+        $ayah->foto = $fileNameToStoreAyah;
         $ayah->save();
 
         // menyimpan data ibu
@@ -140,7 +140,7 @@ class orangtuaController extends Controller
             //get filename with extension
             $filenameWithExt = $request->file('fotoIbu')->getClientOriginalName();
             //get just file name
-            $fotoIbu = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             //get just ext
             $extension = $request->file('fotoIbu')->getClientOriginalExtension();
             //filename to store
@@ -162,7 +162,7 @@ class orangtuaController extends Controller
         $ibu->tanggalLahir = $request->input('tanggalLahirIbu');
         $ibu->role = $role;
         $ibu->status = $status;
-        $ibu->foto = $pathIbu;
+        $ibu->foto = $fileNameToStore;
         $ibu->save();
 
         $siswa = siswa::find($request->input('idSiswa'));
@@ -232,7 +232,7 @@ class orangtuaController extends Controller
             //get filename with extension
             $filenameWithExt = $request->file('foto')->getClientOriginalName();
             //get just file name
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $filename = pathinfo ($filenameWithExt, PATHINFO_FILENAME);
             //get just ext
             $extension = $request->file('foto')->getClientOriginalExtension();
             //filename to store

@@ -322,7 +322,7 @@ class siswaController extends Controller
             $siswa->fotoSiswa = $fileNameToStore;
         }
         $siswa->save();
-        return redirect('/daftarSiswa')->with('success', 'data siswa baru telah dibuat!');
+        return redirect('/daftarSiswa')->with('success', 'data siswa telah diubah!');
     }
 
     /**

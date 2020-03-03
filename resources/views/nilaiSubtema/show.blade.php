@@ -10,13 +10,15 @@
     </div>
     <div class="card-header" align="justify">
         <h5>Judul Subtema : {{$subtema->judul}}</h5>
-        <h5>Deskripsi Subtema: {{$subtema->deskripsi}}</h5>
         <h5>Nilai Subtema : {{$nilaiSubtema->nilai}}</h5>
-        <h5>Deskripsi Penilaian : {{$nilaiSubtema->deskripsi}}</h5>
+        
+        <h5>Deskripsi Penilaian : {!! $nilaiSubtema->deskripsi !!}</h5>
         <h5>Hasil Kegiatan : </h5>
         <div class="col-md-6">
             <img  style="width: 100%" src="/storage/fotoSubtema/{{$nilaiSubtema->fotoHasil}}" alt="">
-        </div>
+        </div> <br>
+        <h5>Deskripsi Subtema: {!! $subtema->deskripsi !!}</h5>
+        
     </div>
 
 </div>

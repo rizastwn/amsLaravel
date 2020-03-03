@@ -31,21 +31,17 @@
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    <option value="4">4</option>
+                   
                 </select>
             </div>
-            <div class="form-group col-md-3" >
+            <div class="form-group col-md-4" >
                 <label for="sel1">Jenis : </label>
                 <select name="jenis" class="form-control" id="sel1">
-                    <option value="ketrampilan" >Ketrampilan</option>
                     <option value="pengetahuan">Pengetahuan</option>
+                    <option value="ketrampilan" >Ketrampilan</option>
                 </select>
             </div>
-            <div class="col-md-4">
                 <input type="submit" value="CARI" class="btn btn-info">
-                <a href="/nilaiTema/create" class="btn btn-info">Tambah Nilai Siswa</a>
-            </div>
-           
         </form>
     </div>
     
@@ -67,14 +63,8 @@
                     <td>{{$data->nilai}}</td>
                     <td>{{$data->deskripsi}}</td>
                     <td>
-                        <form action="{{action('nilaiTemaController@destroy', $data['id'])}}" method="post">
-                            @csrf
                             <a href="/nilaiTema/{{$data->id}}/edit" class="btn btn-info">ubah nilai</a>
                             <a href="/lihatSubtema/{{$data->id}}" class="btn btn-info">Lihat Nilai</a>
-                            <input name="_method" type="hidden" value="DELETE">
-                            <button class="btn btn-danger" type="submit">Hapus</button>
-                          </form>
-                    </td>
                 </tr>
                 @endforeach    
             </tbody>

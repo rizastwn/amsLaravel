@@ -1487,8 +1487,9 @@ class nilaiTemaController extends Controller
             ])->first();
         $siswa= siswa::where('id',$kelas->idSiswa)->first();
         $mataPelajaran = nilai::where([
-            ['kelas',$user->kelas]
-            ])->get();
+            ['kelas',$user->kelas],
+            ['semester','ganjil']
+            ])->get(10);
         return view('nilaiSubtema.create')->with(['siswa'=> $siswa,'mataPelajaran'=> $mataPelajaran,'kelas'=>$kelas]);
     }
 
