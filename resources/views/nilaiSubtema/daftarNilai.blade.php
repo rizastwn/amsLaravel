@@ -22,6 +22,7 @@
                 <tr align="justify">
                     <th>{{$data->nama}}</th>
                     <th>{{$data->semester}}</th>
+                    
                     <th>
                         <a href="/nilaiSubtema/{{$data->id}}" class="btn btn-info">lihat nilai</a>
                     </th>  

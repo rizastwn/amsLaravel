@@ -44,7 +44,7 @@ h4{
       <h4>Daftar Siswa</h4>
         <table class="table bordered">
             <thead>
-                <tr align="center">
+                <tr align="justify">
                 <th scope="col">Nama</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">Semester</th>
@@ -53,7 +53,7 @@ h4{
             </thead>
             <tbody>
                 @foreach ($siswa as $data)
-                <tr align="center">
+                <tr align="justify">
                     <th>{{$data->nama}}</th>
                     <th>{{$data->kelas}}</th>
                     <th>{{$data->semester}}</th>

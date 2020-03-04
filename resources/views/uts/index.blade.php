@@ -31,7 +31,7 @@
         <div class="col-md-10">
             <table class="table bordered">
                 <thead>
-                    <tr align="center">
+                    <tr align="justify">
                     <th scope="col">Mata Pelajaran</th>
                     <th scope="col">Nilai Ujian Tengah Semester</th>
                     <th scope="col">Nilai Ujian Akhir Semester</th>
@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                     @foreach ($nilai as $data)
-                    <tr align="center">
+                    <tr align="justify">
                         <th>{{$data->mataPelajaran}}</th>
                         <th>{{($data->utsP+$data->utsP)/2}}</th>
                         <th>{{($data->uasP+$data->uasP)/2}}</th>

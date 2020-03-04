@@ -186,7 +186,7 @@
   </div>
   <table class="table bordered">
     <thead>
-        <tr align="center">
+        <tr align="justify">
         <th scope="col">Nama</th>
         <th scope="col">Kelas</th>
         <th scope="col">Menu</th>
@@ -194,7 +194,7 @@
     </thead>
     <tbody>
         @foreach ($namaSiswa as $data)
-        <tr align="center">
+        <tr align="justify">
             <th>{{$data->nama}}</th>
             <th>{{$data->kelas}}</th>
             <th>

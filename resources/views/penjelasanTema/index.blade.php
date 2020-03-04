@@ -40,10 +40,10 @@
             </thead>
             <tbody >
                 @foreach ($tema as $data)
-                <tr align="center">
+                <tr align="justify">
                     <td>{{$data->tema}}</td>
                     <td>{{$data->judul}}</td>
-                    <td>{{$data->isi}}</td>
+                    <td>{!!$data->isi!!}</td>
                     <td>
                         <form action="{{action('temaController@destroy', $data['id'])}}" method="post">
                             @csrf

@@ -6,7 +6,7 @@
         <h1>Membuat Rancangan Subtema Baru</h1>
         <h5>Sebelum membuat rancangan subtema diharuskan untuk mengecek mata pelajaran dan tema yang akan dibuat</h5>
     </div>
-    <div class="card-body ">
+    {{-- <div class="card-body ">
         <form action="/subtema/create" method="GET" class="row">
             {{ csrf_field() }}
             <div class="form-group col-md-4">
@@ -44,45 +44,46 @@
                 <button type="submit" class="btn btn-primary" id="Submit" name="Submit">Cek Subtema</button>
             </div>
         </form>
-    </div>
+    </div> --}}
     <div class="card-body">
-        @if ( $subtema!=null)
         <form action="/subtema" method="POST"  >
             {{ csrf_field() }}
-            <div hidden class="form-group">
-                <label for="usr">Semester :</label>
-                <input type="text" class="form-control" name="semester" value="{{$semester}}">
-            </div>
-            <div hidden class="form-group">
+            <div class="form-group">
                 <label for="usr">Tema :</label>
-                <input type="text" class="form-control" name="tema" value="{{$tema}}">
+                <select class="form-control" name="tema" id="" >
+                    @foreach ($temaKelas as $item)
+                        <option value="{{$item->tema}}">{{$item->tema}} - {{$item->judul}} </option>
+                    @endforeach
+                </select>
             </div>
-            <div hidden class="form-group">
+            <div  class="form-group">
+                <label for="usr">Semester :</label>
+                <select class="form-control" name="semester" id="" >
+                    <option value="ganjil">ganjil</option>
+                    <option value="genap">genap</option>
+                </select>
+            </div>
+            <div  class="form-group">
                 <label for="usr">Jenis :</label>
-                <input type="text" class="form-control" name="jenis" value="{{$jenis}}">
+                <select class="form-control" name="jenis" id="" >
+                    <option value="pengetahuan">pengetahuan</option>
+                    <option value="ketrampilan">ketrampilan</option>
+                </select>
             </div>
-            <div hidden class="form-group">
+            <div class="form-group">
                 <label for="usr">Mata Pelajaran :</label>
-                <input type="text" class="form-control" name="mataPelajaran" value="{{$matpel}}">
+                <select class="form-control" name="mataPelajaran" id="" >
+                    @foreach ($mataPelajaran as $item)
+                    <option value="{{$item->mataPelajaran}}">{{$item->mataPelajaran}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="usr">Subtema :</label>
-                <select name="subtema" class="form-control" >
-                    <option value=""></option>
-                    @if (count($subtema)>0)
-                    @foreach ($subtema as $data)
-                    <option @if ($data->subtema == 1) hidden @endif value="1" >1</option>
-                    <option @if ($data->subtema == 2) hidden @endif value="2" >2</option>
-                    <option @if ($data->subtema == 3) hidden @endif value="3" >3</option>
-                    
-                    @endforeach
-                    @else
+                <select class="form-control" name="subtema" class="form-control" >
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                   
-                    @endif
-                    
                 </select>
             </div>
             <div class="form-group">
@@ -104,8 +105,6 @@
             
             <button type="submit" class="btn btn-primary" id="Submit" name="Submit">simpan data siswa</button>
         </form>
-        
-        @endif
         
     </div>
 

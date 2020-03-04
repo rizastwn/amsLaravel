@@ -23,7 +23,6 @@
                     <option @if ($subtemaD == 1) selected @endif value="1">1</option>
                     <option @if ($subtemaD == 2) selected @endif value="2" >2</option>
                     <option @if ($subtemaD == 3) selected @endif value="3" >3</option>
-                    <option @if ($subtemaD== 4) selected @endif value="3" >4</option>
                     
                 </select>
             </div>
@@ -60,7 +59,7 @@
                 <th scope="col">Menu</th>
                 </tr>
             </thead>
-            <tbody align="left" >
+            <tbody align="justify" >
                 @foreach ($subtema as $item)
                 <tr >
                     <td>{{$item->mataPelajaran}}</td>

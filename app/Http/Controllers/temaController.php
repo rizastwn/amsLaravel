@@ -76,13 +76,35 @@ class temaController extends Controller
             'judul' => 'required',
             'isi' => 'required',
         ]);
-        $tema = new tema;
-        $tema->tema = $request->input('tema');
-        $tema->kelas = $request->input('kelas');
-        $tema->semester = $request->input('semester');
-        $tema->judul = $request->input('judul');
-        $tema->isi = $request->input('isi');
-        $tema->save();
+       
+        $kelas = ['1','2','3'];
+
+        foreach ($kelas as $kelasSiswa) {
+            
+                $temaGanjil = new tema;
+                $temaGanjil->tema = $request->input('tema');
+                $temaGanjil->kelas = $kelasSiswa;
+                $temaGanjil->semester = 'ganjil';
+                $temaGanjil->judul = $request->input('judul');
+                $temaGanjil->isi = $request->input('isi');
+                $temaGanjil->save();
+                
+                $temaGenap = new tema;
+                $temaGenap->tema = $request->input('tema');
+                $temaGenap->kelas = $kelasSiswa;
+                $temaGenap->semester = 'genap';
+                $temaGenap->judul = $request->input('judul');
+                $temaGenap->isi = $request->input('isi');
+                $temaGenap->save();
+           
+        }
+        // $tema = new tema;
+        // $tema->tema = $request->input('tema');
+        // $tema->kelas = $request->input('kelas');
+        // $tema->semester = $request->input('semester');
+        // $tema->judul = $request->input('judul');
+        // $tema->isi = $request->input('isi');
+        // $tema->save();
         return redirect('/daftarTema')->with('success', 'tema baru telah dibuat!');
     }
 

@@ -17,7 +17,7 @@
     <div class="card-body">
         <table class="table bordered">
             <thead>
-                <tr align="center">
+                <tr align="justify">
                 <th scope="col">Mata Pelajaran</th>
                 <th scope="col">P1</th>
                 <th scope="col">K1</th>
@@ -33,7 +33,7 @@
             </thead>
             <tbody>
                 @foreach ($nilai as $data)
-                <tr align="center">
+                <tr align="justify">
                     <th>{{$data->mataPelajaran}}</th>
                     <th>{{$data->p1}}</th>
                     <th>{{$data->k1}}</th>

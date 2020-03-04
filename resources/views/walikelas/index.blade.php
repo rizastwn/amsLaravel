@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                     @foreach ($waliKelas as $data)
-                    <tr align="center">
+                    <tr align="justify">
                         <td><a href="/waliKelas/{{$data->id}}">{{$data->name}}</a></th>
                         <td>{{$data->kelas}}</th>
                      

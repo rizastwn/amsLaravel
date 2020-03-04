@@ -39,7 +39,7 @@
             </thead>
             <tbody >
                 @foreach ($nilai as $data)
-                <tr align="center">
+                <tr align="justify">
                     <td>{{$data->mataPelajaran}}</td>
                     <td>{{$data->nilai}}</td>
                     

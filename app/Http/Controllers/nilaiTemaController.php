@@ -1623,10 +1623,12 @@ class nilaiTemaController extends Controller
     //untuk melihat nilai subtema siswa
     public function nilaiSubtema(Request $request, $id)
     {
+        $kelas = kelas::find($id);
+        $siswa = siswa::where('id',$kelas->idSiswa)->first();
         if(request()->has('tema'))
         {
-            $kelas = kelas::find($id);
-            $siswa = siswa::where('id',$kelas->idSiswa)->first();
+            
+            
             $nilaiTema = nilaiSubtema::where([
                 ['idKelas',$kelas->id],
                 ['tema',$request->input('tema')],
@@ -1640,8 +1642,6 @@ class nilaiTemaController extends Controller
                 ['subtema',$request->input('subtema')],
                 ])->get();
         }else{
-            $kelas = kelas::find($id);
-            $siswa = siswa::where('id',$kelas->idSiswa)->first();
             $nilaiTema = nilaiSubtema::where('idKelas',$kelas->id)->first();
             $nilai = nilaiSubtema::where([
                 ['idKelas',$kelas->id],

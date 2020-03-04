@@ -93,7 +93,7 @@
                 
                 <tbody>
                     @foreach ($nilai as $data)
-                    <tr align="left">
+                    <tr align="justify">
                         <th>{{$data->mataPelajaran}}</th>
                         <th>{{$data->pRata}}</th>
                         <th>{{$data->kRata}}</th>
