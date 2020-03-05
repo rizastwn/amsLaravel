@@ -1627,8 +1627,7 @@ class nilaiTemaController extends Controller
         $siswa = siswa::where('id',$kelas->idSiswa)->first();
         if(request()->has('tema'))
         {
-            
-            
+
             $nilaiTema = nilaiSubtema::where([
                 ['idKelas',$kelas->id],
                 ['tema',$request->input('tema')],
@@ -1661,11 +1660,21 @@ class nilaiTemaController extends Controller
         $kelas = kelas::where('id',$nilaiSubtema->idKelas)->first();
         $siswa = siswa::where('id',$kelas->idSiswa)->first();
         $subtema = subtema::where([
-            ['idKelas',$kelas->id],
             ['tema',$nilaiSubtema->tema],
             ['subtema',$nilaiSubtema->subtema],
         ])->first();
-        return view('nilaiSubtema.show')->with(['subtema' => $subtema,'nilaiSubtema' => $nilaiSubtema, 'siswa' => $siswa,  'kelas' => $kelas]);
+        $tema = tema::where([
+            ['tema',$nilaiSubtema->tema],
+            
+        ])->first();
+        return view('nilaiSubtema.show')->with(
+            [
+                'subtema' => $subtema,
+                'tema' => $tema,
+                'nilaiSubtema' => $nilaiSubtema, 
+                'siswa' => $siswa,  
+                'kelas' => $kelas
+            ]);
     }
 
     //melihat nilai subtema dari sisi wali murid
@@ -1718,10 +1727,10 @@ class nilaiTemaController extends Controller
         $nilai = nilaiSubtema::find($id);
         $kelas = kelas::find($nilai->idKelas);
         $siswa = siswa::find($kelas->idSiswa);
-        $info = jadwal::where([
-            ['kelas', $kelas->kelas],
-            ['semester', $kelas->semester],
-            ['jenis', $nilai->tema]
+        $info = subtema::where([
+            ['tema', $nilai->tema],
+            ['subtema', $nilai->subtema],
+            ['idKelas', $kelas->id],
         ])->first();
         $tanggal = date('Y-m-d');
         $subtema = subtema::where('tema',$nilai->tema)->first();

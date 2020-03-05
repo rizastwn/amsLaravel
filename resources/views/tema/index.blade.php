@@ -49,7 +49,7 @@
    
     <div class="card-body">
         <h6 >Judul : {{$judul->judul}}</h6>
-        <h6 align="justify">Tujuan Tema : {{$judul->isi}}</h6>
+        <h6 align="justify">Tujuan Tema : {!! $judul->isi !!}</h6>
         <h6 align="justify">Sikap Spritual : <br> {{$nilaiSikap->spiritual}}</h6>
         <h6 align="justify">Sikap Sosial : <br> {{$nilaiSikap->sosial}}</h6>
 
@@ -87,7 +87,6 @@
                     <th scope="col">Mata Pelajaran</th>
                     <th scope="col">Nilai Pengetahuan</th>
                     <th scope="col">Nilai Ketrampilan</th>
-                    <th scope="col">Deskripsi</th>
                     </tr>
                 </thead>
                 
@@ -97,7 +96,6 @@
                         <th>{{$data->mataPelajaran}}</th>
                         <th>{{$data->pRata}}</th>
                         <th>{{$data->kRata}}</th>
-                        <th>{{$data->deskripsi}}</th>
                         </tr>
                     @endforeach  
                 </tbody>

@@ -11,7 +11,7 @@
     <div class="card-body">
         <table class="table bordered">   
             <thead>
-                <tr align="center">
+                <tr align="justify">
                 <th scope="col">Nama</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">NIS</th>
@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 @foreach ($siswa as $data)
-                <tr align="center">
+                <tr align="justify">
                     <td><a href="/siswa/{{$data->id}}">{{$data->nama}}</a></th>
                     <td>{{$data->kelas}}</th>
                     <td>{{$data->nis}}</th>

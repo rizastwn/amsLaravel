@@ -25,10 +25,9 @@
                 <th scope="col">K2</th>
                 <th scope="col">P3</th>
                 <th scope="col">K3</th>
-                <th scope="col">Rata-rata nilai pengetahuan</th>
-                <th scope="col">Rata-rata nilai ketrampilan </th>
-                <th scope="col">Deskripsi</th>
-                <th scope="col">Menu</th>
+                <th scope="col">Rata-rata <br> nilai pengetahuan</th>
+                <th scope="col"> Rata-rata <br> nilai ketrampilan </th>
+                
                 </tr>
             </thead>
             <tbody>
@@ -43,11 +42,6 @@
                     <th>{{$data->k3}}</th>
                     <th>{{$data->pRata}}</th>
                     <th>{{$data->kRata}}</th>
-                   <th>{{$data->deskripsi}}</th>
-                    <th>
-                        <a href="/nilaiTema/{{$data->id}}/edit" class="btn btn-info">Ubah Nilai </a>
-                    </th>
-                </tr>  
                 @endforeach                    
             </tbody>
         </table>

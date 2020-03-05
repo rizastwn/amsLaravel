@@ -5,7 +5,7 @@
         <h5>Nama Siswa : {{$siswa->nama}}</h5>
         <h5>Kelas : {{$kelas->kelas}}</h5>
         <h5>Mata Pelajaran : {{$nilaiSubtema->mataPelajaran}}</h5>
-        <h5>Tema : {{$nilaiSubtema->tema}}</h5>
+        <h5>Tema : {{$nilaiSubtema->tema}} - {{$tema->judul}} </h5>
         <h5>Subtema : {{$nilaiSubtema->subtema}}</h5>
     </div>
     <div class="card-header" align="justify">

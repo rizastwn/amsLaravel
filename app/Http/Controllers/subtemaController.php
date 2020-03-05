@@ -7,8 +7,6 @@ use App\nilai;
 use App\nilaiSubtema;
 use App\subtema;
 use App\tema;
-
-use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -107,6 +105,8 @@ class subtemaController extends Controller
             'deskripsi' => 'required',
             'mataPelajaran' => 'required',
         ]);
+
+        
         $temaLoop = ['1', '2', '3', '4'];
         $subTemaLoop = ['1', '2','3'];
         //mencari id kelasGanjil
@@ -195,14 +195,14 @@ class subtemaController extends Controller
             ['semester', 'ganjil'],
         ])->get();
 
-        foreach ($kelasSiswaGanjil as $siswa) {
+        foreach ($kelasSiswaGanjil as $kelas) {
 
             if (is_array($temaLoop) || is_object($temaLoop)) {
                 foreach ($temaLoop as $data) {
                     if (is_array($subTemaLoop) || is_object($subTemaLoop)) {
                         foreach ($subTemaLoop as $item) {
                             $nilaiSubtemaPenge = new nilaiSubtema;
-                            $nilaiSubtemaPenge->idKelas = $siswa->id;
+                            $nilaiSubtemaPenge->idKelas = $kelas->id;
                             $nilaiSubtemaPenge->tema = $data;
                             $nilaiSubtemaPenge->subtema = $item;
                             $nilaiSubtemaPenge->jenis = 'pengetahuan';
@@ -213,13 +213,13 @@ class subtemaController extends Controller
                             $nilaiSubtemaPenge->save();
 
                             $nilaiSubtemaPenge = new nilaiSubtema;
-                            $nilaiSubtemaPenge->idKelas = $siswa->id;
+                            $nilaiSubtemaPenge->idKelas = $kelas->id;
                             $nilaiSubtemaPenge->tema = $data;
                             $nilaiSubtemaPenge->subtema = $item;
                             $nilaiSubtemaPenge->jenis = 'ketrampilan';
+                            $nilaiSubtemaPenge->nilai = rand(70, 100);
                             $nilaiSubtemaPenge->fotoHasil = 'kegiatanKelas.jpg';
                             $nilaiSubtemaPenge->deskripsi = 'siswa berhasil mengerjakan tugas dengan baik, walaupun pada awalnya sedikit kesulitan';
-                            $nilaiSubtemaPenge->nilai = rand(70, 100);
                             $nilaiSubtemaPenge->mataPelajaran = $request->input('mataPelajaran');
                             $nilaiSubtemaPenge->save();
                         }
@@ -235,31 +235,31 @@ class subtemaController extends Controller
             ['semester', 'genap'],
         ])->get();
 
-        foreach ($kelasSiswaGenap as $data) {
+        foreach ($kelasSiswaGenap as $kelas) {
 
             if (is_array($temaLoop) || is_object($temaLoop)) {
                 foreach ($temaLoop as $data) {
                     if (is_array($subTemaLoop) || is_object($subTemaLoop)) {
                         foreach ($subTemaLoop as $item) {
                             $nilaiSubtemaPenge = new nilaiSubtema;
-                            $nilaiSubtemaPenge->idKelas =  $siswa->id;
+                            $nilaiSubtemaPenge->idKelas = $kelas->id;
                             $nilaiSubtemaPenge->tema = $data;
                             $nilaiSubtemaPenge->subtema = $item;
                             $nilaiSubtemaPenge->jenis = 'pengetahuan';
+                            $nilaiSubtemaPenge->nilai = rand(70, 100);
                             $nilaiSubtemaPenge->fotoHasil = 'kegiatanKelas.jpg';
                             $nilaiSubtemaPenge->deskripsi = 'siswa berhasil mengerjakan tugas dengan baik, walaupun pada awalnya sedikit kesulitan';
-                            $nilaiSubtemaPenge->nilai = rand(70, 100);
                             $nilaiSubtemaPenge->mataPelajaran = $request->input('mataPelajaran');
                             $nilaiSubtemaPenge->save();
 
                             $nilaiSubtemaPenge = new nilaiSubtema;
-                            $nilaiSubtemaPenge->idKelas = $siswa->id;
+                            $nilaiSubtemaPenge->idKelas = $kelas->id;
                             $nilaiSubtemaPenge->tema = $data;
                             $nilaiSubtemaPenge->subtema = $item;
                             $nilaiSubtemaPenge->jenis = 'ketrampilan';
-                            $nilaiSubtemaPenge->deskripsi = 'siswa berhasil mengerjakan tugas dengan baik, walaupun pada awalnya sedikit kesulitan';
-                            $nilaiSubtemaPenge->fotoHasil = 'kegiatanKelas.jpg';
                             $nilaiSubtemaPenge->nilai = rand(70, 100);
+                            $nilaiSubtemaPenge->fotoHasil = 'kegiatanKelas.jpg';
+                            $nilaiSubtemaPenge->deskripsi = 'siswa berhasil mengerjakan tugas dengan baik, walaupun pada awalnya sedikit kesulitan';
                             $nilaiSubtemaPenge->mataPelajaran = $request->input('mataPelajaran');
                             $nilaiSubtemaPenge->save();
                         }
@@ -267,10 +267,8 @@ class subtemaController extends Controller
                 }
             }
         }
-
         
-        
-        //mencari id kelas
+        // //mencari id kelas
         // $user = Auth::user();
         // $kelas = kelas::where([
         //     ['idWaliKelas', $user->id],

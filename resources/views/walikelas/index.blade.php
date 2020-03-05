@@ -8,7 +8,7 @@
     <div class="card-body">
         <table class="table bordered">   
                 <thead>
-                    <tr align="center">
+                    <tr align="justify">
                     <th scope="col">Nama</th>
                     <th scope="col">Kelas</th>
 

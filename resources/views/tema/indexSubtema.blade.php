@@ -67,7 +67,7 @@
                     <th>{{$data->mataPelajaran}}</th>
                     <th>{{$data->pRata}}</th>
                     <th>{{$data->kRata}}</th>
-                    <th>{{$data->deskripsi}}</th>
+                    <th>{!! $data->deskripsi !!}</th>
                     </tr>
                 @endforeach
                 

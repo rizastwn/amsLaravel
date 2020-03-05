@@ -6,7 +6,7 @@
     <h5>Nama : {{$siswa->nama}}</h5>
     <h5>Kelas : {{$kelas->kelas}}</h5>
     <h5>Tema : {{$nilai->tema}}</h5>
-    <h5>Subtema : {{$nilai->subtema}}</h5>
+    <h5>Subtema : {{$nilai->subtema}} </h5>
     <h5>Judul Subtema : {{$subtema->judul}}</h5>
     <h5>Jenis Nilai : {{$nilai->jenis}}</h5>
     <h5>Matapelajaran : {{$nilai->mataPelajaran}}</h5>

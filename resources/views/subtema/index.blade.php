@@ -59,12 +59,12 @@
                 <th scope="col">Menu</th>
                 </tr>
             </thead>
-            <tbody align="justify" >
+            <tbody align="left" >
                 @foreach ($subtema as $item)
                 <tr >
                     <td>{{$item->mataPelajaran}}</td>
                     <td>{{$item->judul}}</td>
-                    <td align="">
+                    <td >
                         <form  action="{{action('subtemaController@destroy', $item['id'])}}" method="post">
                             @csrf
                             <a href="/subtema/{{$item->id}}" class="btn btn-success">Lihat </a> 
