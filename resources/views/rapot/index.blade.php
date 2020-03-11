@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                     @foreach ($nilai as $item)
-                    <tr align="center">
+                    <tr align="left">
                         <th>{{$item->mataPelajaran}}</th>
                         <th>{{$item->nilaiKetrampilan}}</th>
                         <th>{{$item->nilaiPengetahuan}}</th>

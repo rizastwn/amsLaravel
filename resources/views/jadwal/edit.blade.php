@@ -13,7 +13,11 @@
             </div>
             <div class="form-group">
                 <label for="usr">semester :</label>
-                <input type="text" class="form-control" name="semester" value="{{$jadwal->semester}}">
+                <select class="form-control" name="semester" id="">
+                    <option @if ($jadwal->semester == 'ganjil') selected @endif value="ganjil">ganjil</option>
+                    <option @if ($jadwal->semester == 'genap') selected @endif value="genap">genap</option>
+                </select>
+                
             </div>
             <div class="form-group">
                 <label for="usr">Nama Kegiatan:</label>

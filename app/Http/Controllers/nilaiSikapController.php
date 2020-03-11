@@ -82,16 +82,6 @@ class nilaiSikapController extends Controller
         $nilai->sosial = $request->input('sosial');
         $nilai->spiritual = $request->input('spiritual');
         $nilai->save();
-        // $nilai = nilaiAkhir::all();
-        // foreach ($nilai as $rapot) {
-        //     $data = nilaiAkhir::find($rapot->id);
-        //     $data->nilaiKetrampilan = rand(70, 100);
-        //     $data->nilaiPengetahuan = rand(70, 100);
-        //     $data->deskripsi = 'siswa memiliki potensi dalam mata pelajaran ini, semoga bisa terus dikembangkan';
-        //     $data->save();
-        // }
-
-        
         return redirect('/daftarNilaiTema')->with('success', 'nilai sikap tema berhasil diubah!');
     }
 

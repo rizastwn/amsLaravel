@@ -25,6 +25,7 @@
                         <td>
                                 <form action="{{action('waliKelasController@destroy', $data->id ) }}" method="post">
                                     @csrf
+                                    <a href="/waliKelas/{{$data->id}}" class="btn btn-info">Lihat</a>
                                     <a href="/waliKelas/{{$data->id}}/edit" class="btn btn-info">Edit</a>
                                     <input name="_method" type="hidden" value="DELETE">
                                     <button class="btn btn-danger" type="submit">Hapus</button>

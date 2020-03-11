@@ -28,9 +28,10 @@
                     <td>
                             <form action="{{action('siswaController@destroy', $data->id ) }}" method="post">
                                 @csrf
-                                @if ($data->status=='siswa')
+                                <a href="/siswa/{{$data->id}}" class="btn btn-success">Lihat</a>
+                                
                                 <a href="/naikKelas/{{$data->id}}/edit" class="btn btn-info">Naik Kelas</a>
-                                @endif
+
                                 <a href="/siswa/{{$data->id}}/edit" class="btn btn-info">Edit</a>
                                 <input name="_method" type="hidden" value="DELETE">
                                 <button class="btn btn-danger" type="submit">Hapus</button>

@@ -15,7 +15,7 @@ class nilaiController extends Controller
     public function index(Request $request)
     {
         $nilai = nilai::where([
-            ['kelas', '1'],
+            ['kelas', '2'],
             ['semester', 'ganjil'],
         ])->get();
         $semester = $request->input('semester');

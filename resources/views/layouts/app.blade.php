@@ -117,7 +117,11 @@
                         {{-- side bar untuk admin --}}
                         {{-- side bar untuk wali kelas --}}
                         @if (Auth::user()->role == 'wali kelas')
-                        
+                        <li>
+                            <a href="/waliKelas/{{Auth::user()->id}}">
+                                <i class="fa fa-book"></i> Profil Wali Kelas
+                            </a>
+                        </li>
                         <li>
                             <a href="/daftarNilaiTema">
                                 <i class="fa fa-book"></i> Daftar Nilai Tema

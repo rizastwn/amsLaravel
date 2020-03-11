@@ -37,7 +37,7 @@
                 <th scope="col">Menu</th>  
                 </tr>
             </thead>
-            <tbody >
+            <tbody>
                 @foreach ($nilai as $data)
                 <tr align="justify">
                     <td>{{$data->mataPelajaran}}</td>

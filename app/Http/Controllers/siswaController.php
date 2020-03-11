@@ -158,15 +158,15 @@ class siswaController extends Controller
                         $nilaiTemaGanjil = new nilaiTema;
                         $nilaiTemaGanjil->idKelas = $kelasGanjil->id;
                         $nilaiTemaGanjil->tema = $data;
-                        $nilaiTemaGanjil->p1 = rand(70, 100);
-                        $nilaiTemaGanjil->p2 = rand(70, 100);
-                        $nilaiTemaGanjil->p3 = rand(70, 100);
-                        $nilaiTemaGanjil->k1 = rand(70, 100);
-                        $nilaiTemaGanjil->k2 = rand(70, 100);
-                        $nilaiTemaGanjil->k3 = rand(70, 100);
-                        $nilaiTemaGanjil->pRata = rand(70, 100);
-                        $nilaiTemaGanjil->kRata = rand(70, 100);
-                        $nilaiTemaGanjil->mataPelajaran = $item;
+                        // $nilaiTemaGanjil->p1 = rand(70, 100);
+                        // $nilaiTemaGanjil->p2 = rand(70, 100);
+                        // $nilaiTemaGanjil->p3 = rand(70, 100);
+                        // $nilaiTemaGanjil->k1 = rand(70, 100);
+                        // $nilaiTemaGanjil->k2 = rand(70, 100);
+                        // $nilaiTemaGanjil->k3 = rand(70, 100);
+                        // $nilaiTemaGanjil->pRata = rand(70, 100);
+                        // $nilaiTemaGanjil->kRata = rand(70, 100);
+                        // $nilaiTemaGanjil->mataPelajaran = $item;
                         $nilaiTemaGanjil->save();
                     }
                 }
@@ -179,8 +179,8 @@ class siswaController extends Controller
                 $nilaiSikapGanjil = new nilaiSikapSpritual;
                 $nilaiSikapGanjil->idKelas = $kelasGanjil->id;
                 $nilaiSikapGanjil->tema = $item;
-                $nilaiSikapGanjil->sosial = 'siswa telah bisa bersosialiasi dengan teman sebaya dan guru-guru sekolah';
-                $nilaiSikapGanjil->sosial = 'siswa telah bisa mengendalikan emosinya seperti senang, marah, dan bahagia';
+                // $nilaiSikapGanjil->sosial = 'siswa telah bisa bersosialiasi dengan teman sebaya dan guru-guru sekolah';
+                // $nilaiSikapGanjil->sosial = 'siswa telah bisa mengendalikan emosinya seperti senang, marah, dan bahagia';
                 $nilaiSikapGanjil->save();
             }
         }
@@ -191,10 +191,10 @@ class siswaController extends Controller
                 $nilaiUtsUasGanjil = new nilaiUtsUas;
                 $nilaiUtsUasGanjil->idKelas = $kelasGanjil->id;
                 $nilaiUtsUasGanjil->mataPelajaran = $item;
-                $nilaiUtsUasGanjil->utsP = rand(70, 100);
-                $nilaiUtsUasGanjil->uasP = rand(70, 100);
-                $nilaiUtsUasGanjil->utsK = rand(70, 100);
-                $nilaiUtsUasGanjil->uasK = rand(70, 100);
+                // $nilaiUtsUasGanjil->utsP = rand(70, 100);
+                // $nilaiUtsUasGanjil->uasP = rand(70, 100);
+                // $nilaiUtsUasGanjil->utsK = rand(70, 100);
+                // $nilaiUtsUasGanjil->uasK = rand(70, 100);
                 $nilaiUtsUasGanjil->save();
             }
         }
@@ -204,17 +204,17 @@ class siswaController extends Controller
                 $nilaiAkhirGanjil = new nilaiAkhir;
                 $nilaiAkhirGanjil->idKelas = $kelasGanjil->id;
                 $nilaiAkhirGanjil->mataPelajaran = $item;
-                $nilaiUtsUasGanjil->nilaiKetrampilan = rand(70, 100);
-                $nilaiUtsUasGanjil->nilaiPengetahuan = rand(70, 100);
-                $nilaiUtsUasGanjil->deskripsi = 'siswa memiliki potensi dalam mata pelajaran ini, semoga bisa terus dikembangkan';
+                // $nilaiUtsUasGanjil->nilaiKetrampilan = rand(70, 100);
+                // $nilaiUtsUasGanjil->nilaiPengetahuan = rand(70, 100);
+                // $nilaiUtsUasGanjil->deskripsi = 'siswa memiliki potensi dalam mata pelajaran ini, semoga bisa terus dikembangkan';
                 $nilaiAkhirGanjil->save();
             }
         }
         //nilai sikap untuk nilai akhir
         $nilaiSikapGanjil = new nilaiAkhirSikap;
         $nilaiSikapGanjil->idKelas = $kelasGanjil->id;
-        $nilaiSikapGanjil->sosial = 'siswa telah bisa bersosialiasi dengan teman sebaya dan guru-guru sekolah';
-        $nilaiSikapGanjil->spiritual = 'siswa telah bisa mengendalikan emosinya seperti senang, marah, dan bahagia';
+        // $nilaiSikapGanjil->sosial = 'siswa telah bisa bersosialiasi dengan teman sebaya dan guru-guru sekolah';
+        // $nilaiSikapGanjil->spiritual = 'siswa telah bisa mengendalikan emosinya seperti senang, marah, dan bahagia';
         $nilaiSikapGanjil->save();
 
         /////////
@@ -226,12 +226,12 @@ class siswaController extends Controller
                         $nilaiTemaGenap = new nilaiTema;
                         $nilaiTemaGenap->idKelas = $kelasGenap->id;
                         $nilaiTemaGenap->tema = $data;
-                        $nilaiTemaGenap->p1 = rand(70, 100);
-                        $nilaiTemaGenap->p2 = rand(70, 100);
-                        $nilaiTemaGenap->p3 = rand(70, 100);
-                        $nilaiTemaGenap->k1 = rand(70, 100);
-                        $nilaiTemaGenap->k2 = rand(70, 100);
-                        $nilaiTemaGenap->k3 = rand(70, 100);
+                        // $nilaiTemaGenap->p1 = rand(70, 100);
+                        // $nilaiTemaGenap->p2 = rand(70, 100);
+                        // $nilaiTemaGenap->p3 = rand(70, 100);
+                        // $nilaiTemaGenap->k1 = rand(70, 100);
+                        // $nilaiTemaGenap->k2 = rand(70, 100);
+                        // $nilaiTemaGenap->k3 = rand(70, 100);
                         $nilaiTemaGenap->pRata = rand(70, 100);
                         $nilaiTemaGenap->kRata = rand(70, 100);
                         $nilaiTemaGenap->mataPelajaran = $item;
@@ -246,8 +246,8 @@ class siswaController extends Controller
             foreach ($tema as $item) {
                 $nilaiSikapGenap = new nilaiSikapSpritual;
                 $nilaiSikapGenap->idKelas = $kelasGenap->id;
-                $nilaiSikapGenap->sosial = 'siswa telah bisa bersosialiasi dengan teman sebaya dan guru-guru sekolah';
-                $nilaiSikapGenap->sosial = 'siswa telah bisa mengendalikan emosinya seperti senang, marah, dan bahagia';
+                // $nilaiSikapGenap->sosial = 'siswa telah bisa bersosialiasi dengan teman sebaya dan guru-guru sekolah';
+                // $nilaiSikapGenap->sosial = 'siswa telah bisa mengendalikan emosinya seperti senang, marah, dan bahagia';
                 $nilaiSikapGenap->tema = $item;
                 $nilaiSikapGenap->save();
             }
@@ -258,10 +258,10 @@ class siswaController extends Controller
             foreach ($mataPelajaran as $item) {
                 $nilaiUtsUasGenap = new nilaiUtsUas;
                 $nilaiUtsUasGenap->idKelas = $kelasGenap->id;
-                $nilaiUtsUasGenap->utsP = rand(70, 100);
-                $nilaiUtsUasGenap->uasP = rand(70, 100);
-                $nilaiUtsUasGenap->utsK = rand(70, 100);
-                $nilaiUtsUasGenap->uasK = rand(70, 100);
+                // $nilaiUtsUasGenap->utsP = rand(70, 100);
+                // $nilaiUtsUasGenap->uasP = rand(70, 100);
+                // $nilaiUtsUasGenap->utsK = rand(70, 100);
+                // $nilaiUtsUasGenap->uasK = rand(70, 100);
                 $nilaiUtsUasGenap->mataPelajaran = $item;
                 $nilaiUtsUasGenap->save();
             }
@@ -272,8 +272,8 @@ class siswaController extends Controller
                 $nilaiAkhirGenap = new nilaiAkhir;
                 $nilaiAkhirGenap->idKelas = $kelasGenap->id;
                 $nilaiAkhirGenap->mataPelajaran = $item;
-                $nilaiAkhirGenap->nilaiKetrampilan = rand(70, 100);
-                $nilaiAkhirGenap->nilaiPengetahuan = rand(70, 100);
+                // $nilaiAkhirGenap->nilaiKetrampilan = rand(70, 100);
+                // $nilaiAkhirGenap->nilaiPengetahuan = rand(70, 100);
                 $nilaiAkhirGenap->deskripsi = 'siswa memiliki potensi dalam mata pelajaran ini, semoga bisa terus dikembangkan';
                 $nilaiAkhirGenap->save();
             }

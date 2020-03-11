@@ -67,7 +67,7 @@
                     <td>{{$data->nilai}}</td>
                     <td>{{$data->deskripsi}}</td>
                     <td>
-                            <a href="/lihatSubtema/{{$data->id}}" class="btn btn-info">Lihat Nilai</a>
+                            <a href="/lihatSubtema/{{$data->id}}" class="btn btn-info">Lihat Detail</a>
                     </td>
                 </tr>
                 @endforeach    
