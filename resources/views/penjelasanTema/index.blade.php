@@ -21,7 +21,7 @@
                 <option value="genap"  @if ($semester== 'genap' ) selected @endif>Genap</option>
             </select>
         </div>
-        <input type="submit" class="btn btn-success" value="cari jadwal">
+        <input type="submit" class="btn btn-success" value="Lihat Jadwal">
         <div class="col-md-3">
             <a href="/daftarTema/create" class="btn btn-info">buat jadwal baru</a>
         </div>

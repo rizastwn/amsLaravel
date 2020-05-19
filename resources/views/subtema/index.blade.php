@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-2">
                 <br>
-                <input type="submit" value="Cari Tema" class="btn btn-info">
+                <input type="submit" value="Lihat" class="btn btn-info">
             </div>
             
                 

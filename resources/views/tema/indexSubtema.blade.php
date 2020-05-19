@@ -37,7 +37,7 @@
 
                 </select>
             </div>
-           <input type="submit" value="CARI">
+           <input type="submit" value="Lihat">
         </div>
         </form>
     

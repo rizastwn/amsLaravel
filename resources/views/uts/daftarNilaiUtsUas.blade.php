@@ -13,7 +13,7 @@
     <div class="card-body ">
         <!-- Chart -->
     <!-- Card header -->
-  <div class="card-header" role="tab" id="heading4">
+  <div class="card-header" role="tab" >
     <a data-toggle="collapse" data-parent="#accordionEx194" href="#collapse4" aria-expanded="true"
       aria-controls="collapse4">
       <h4 class="mb-0 red-text">

@@ -22,7 +22,7 @@
                 <option value="genap">Genap</option>
             </select>
         </div>
-        <input type="submit" class="btn btn-info" value="cari nilai">
+        <input type="submit" class="btn btn-info" value="Lihat Nilai">
     </form>
         
     

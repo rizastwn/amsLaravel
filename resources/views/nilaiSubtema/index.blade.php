@@ -42,7 +42,7 @@
                 </select>
             </div>
             <div class="col-md-4">
-                <input type="submit" value="CARI" class="btn btn-info">
+                <input type="submit" value="Lihat" class="btn btn-info">
                 
             </div>
            
