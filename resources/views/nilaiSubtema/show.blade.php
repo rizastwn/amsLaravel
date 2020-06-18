@@ -7,6 +7,7 @@
         <h5>Mata Pelajaran : {{$nilaiSubtema->mataPelajaran}}</h5>
         <h5>Tema : {{$nilaiSubtema->tema}} - {{$tema->judul}} </h5>
         <h5>Subtema : {{$nilaiSubtema->subtema}}</h5>
+        <a class="btn btn-info" href="/nilaiTema/{{$nilaiSubtema->id}}/edit">Ubah Nilai</a></td>
     </div>
     <div class="card-header" align="justify">
         <h5>Judul Subtema : {{$subtema->judul}}</h5>

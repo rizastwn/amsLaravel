@@ -33,7 +33,7 @@
                 </select>
             </div>
             
-                <input type="submit" value="Lihat Data" class="btn btn-info">
+                <input type="submit" value="Lihat Nilai" class="btn btn-info">
         </form>
     </div>
     
@@ -42,7 +42,7 @@
         
             <table class="table bordered table-hover">
                 <thead>
-                    <tr align="justify">
+                    <tr >
                     <th scope="col">Jenis</th>
                     @foreach ($nilaiPengetahuan as $item)
                     <td>{{$item->mataPelajaran}}</td>
@@ -51,19 +51,18 @@
                 </thead>
                 {{-- <a href="/nilaiTema/{{$data->id}}/edit" class="btn btn-info">Ubah nilai</a> 
                 <a href="/lihatSubtema/{{$data->id}}" class="btn btn-success">Lihat Detail</a> --}}
-                <tbody >         
-                   
-                    <tr align="justify">
+                <tbody>         
+                    <tr>
                        <th>Nilai Pengetahuan</th>
                        @foreach ($nilaiPengetahuan as $item)
-                       <td>{{$item->nilai}}  <br> <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}"> lihat detail</a></td>
+                       <td>{{$item->nilai}}  <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}">lihat</a></td>
                        @endforeach
                     </tr> 
                    
-                    <tr align="justify">
-                        <th>Nilai Ketrampilan</th>
+                    <tr>
+                        <th>Nilai Ketrampilan</th> <br>
                         @foreach ($nilaiKetrampilan as $item)
-                       <td>{{$item->nilai}} <br> <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}"> lihat detail</a></td>
+                       <td>{{$item->nilai}} <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}">lihat </a></td>
                        @endforeach
                      </tr> 
                 </tbody>

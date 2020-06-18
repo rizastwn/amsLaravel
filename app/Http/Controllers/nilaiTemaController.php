@@ -1675,7 +1675,7 @@ class nilaiTemaController extends Controller
         $counter = 1;
         $counterP = count($nilaiPengetahuan);
         $counterK = count($nilaiKetrampilan);
-        return view('tema.showSubtema')->with([  
+        return view('nilaiSubtema.showSubtema')->with([  
             'siswa' => $siswa, 
             'nilaiPengetahuan' => $nilaiPengetahuan, 
             'nilaiKetrampilan' => $nilaiKetrampilan,
