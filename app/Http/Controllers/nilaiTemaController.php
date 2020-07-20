@@ -12,7 +12,7 @@ use App\nilaiTema;
 use App\siswa;
 use App\subtema;
 use App\tema;
-use App\User;
+use App\jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -1764,13 +1764,17 @@ class nilaiTemaController extends Controller
         $nilai = nilaiSubtema::find($id);
         $kelas = kelas::find($nilai->idKelas);
         $siswa = siswa::find($kelas->idSiswa);
-        $info = subtema::where([
-            ['tema', $nilai->tema],
-            ['subtema', $nilai->subtema],
-            ['idKelas', $kelas->id],
-        ])->first();
+        $info = jadwal::where([
+            ['jenis', $nilai->tema],
+            ['semester',$kelas->semester],
+            ['kelas',$kelas->kelas]
+            ])->first();
         $tanggal = date('Y-m-d');
-        $subtema = subtema::where('tema', $nilai->tema)->first();
+        $subtema = jadwal::where([
+            ['jenis', $nilai->tema],
+            ['semester',$kelas->semester],
+            ['kelas',$kelas->kelas]
+            ])->first();
         return view('tema.edit')->with([
             'siswa' => $siswa, 'nilai' => $nilai, 'kelas' => $kelas,
             'info' => $info, 'tanggal' => $tanggal, 'subtema' => $subtema,

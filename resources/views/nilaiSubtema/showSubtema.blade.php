@@ -49,20 +49,29 @@
                     @endforeach
                     </tr>
                 </thead>
-                {{-- <a href="/nilaiTema/{{$data->id}}/edit" class="btn btn-info">Ubah nilai</a> 
-                <a href="/lihatSubtema/{{$data->id}}" class="btn btn-success">Lihat Detail</a> --}}
+                
                 <tbody>         
                     <tr>
                        <th>Nilai Pengetahuan</th>
                        @foreach ($nilaiPengetahuan as $item)
-                       <td>{{$item->nilai}}  <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}">lihat</a></td>
+                       <td>
+                           {{$item->nilai}}  
+                           <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}">lihat</a>
+                           <a href="/nilaiTema/{{$item->id}}/edit" class="btn btn-info">Ubah nilai</a>
+                        </td>
+                        
                        @endforeach
                     </tr> 
                    
                     <tr>
                         <th>Nilai Ketrampilan</th> <br>
                         @foreach ($nilaiKetrampilan as $item)
-                       <td>{{$item->nilai}} <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}">lihat </a></td>
+                       <td>
+                           {{$item->nilai}} 
+                           <a class="btn btn-info" href="/lihatSubtema/{{$item->id}}">lihat </a>
+                           <a href="/nilaiTema/{{$item->id}}/edit" class="btn btn-info">Ubah nilai</a> 
+                       </td>
+
                        @endforeach
                      </tr> 
                 </tbody>
