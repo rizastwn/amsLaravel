@@ -1725,8 +1725,6 @@ class nilaiTemaController extends Controller
             ['kelas', $siswa->kelas],
         ])->first();
         if (request()->has('tema')) {
-
-            $siswa = siswa::where('id', $kelas->idSiswa)->first();
             $nilaiTema = nilaiSubtema::where([
                 ['idKelas', $kelas->id],
                 ['tema', $request->input('tema')],
@@ -1740,8 +1738,6 @@ class nilaiTemaController extends Controller
                 ['subtema', $request->input('subtema')],
             ])->get();
         } else {
-
-            $siswa = siswa::where('id', $kelas->idSiswa)->first();
             $nilaiTema = nilaiSubtema::where('idKelas', $kelas->id)->first();
             $nilai = nilaiSubtema::where([
                 ['idKelas', $kelas->id],

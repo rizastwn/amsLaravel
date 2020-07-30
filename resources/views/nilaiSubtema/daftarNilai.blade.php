@@ -14,6 +14,7 @@
                 <tr align="justify">
                     <th scope="col">Nama</th>
                     <th scope="col">Semester</th>
+                    <th scope="col">Tahun Ajaran</th>
                     <th scope="col">Menu</th>
                 </tr>
             </thead>
@@ -22,7 +23,7 @@
                 <tr align="justify">
                     <th>{{$data->nama}}</th>
                     <th>{{$data->semester}}</th>
-                    
+                    <th>2019-{{$data->tahunAjaran}}</th>
                     <th>
                         <a href="/nilaiSubtema/{{$data->id}}" class="btn btn-info">lihat nilai</a>
                         

@@ -5,7 +5,7 @@
         <h2>Daftar Nilai Tema Siswa</h2>        
         <h4>Nama : {{$siswa->nama}}</h4>
         <h4>Kelas : {{$siswa->kelas}}</h4> 
-        <h4>Tahun ajaran : {{$siswa->tahunAjaran}}</h4>
+        <h4>Tahun ajaran : 2019-{{$siswa->tahunAjaran}}</h4>
         <h4>Semester : {{$siswa->semester}}</h4>
         <h4>Tema : {{$siswa->tema}} - {{$tema->judul}}</h4>
     </div>

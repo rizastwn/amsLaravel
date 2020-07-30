@@ -48,6 +48,7 @@ h4{
                 <th scope="col">Nama</th>
                 <th scope="col">Kelas</th>
                 <th scope="col">Semester</th>
+                <th scope="col">Tahun Ajaran</th>
                 <th scope="col">Menu</th>
                 </tr>
             </thead>
@@ -57,6 +58,7 @@ h4{
                     <th>{{$data->nama}}</th>
                     <th>{{$data->kelas}}</th>
                     <th>{{$data->semester}}</th>
+                    <th>2019-{{$data->tahunAjaran}}</th>
                     <th>
                         <a href="/nilaiTema/{{$data->id}}?tema=1" class="btn btn-info">Tema 1</a>
                         <a href="/nilaiTema/{{$data->id}}?tema=2" class="btn btn-info">Tema 2</a>
