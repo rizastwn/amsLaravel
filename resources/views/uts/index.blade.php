@@ -6,6 +6,7 @@
     <h2>Daftar Nilai UTS dan UAS</h2>
     <h4>Kelas : {{$kelas->kelas}}</h4>
     <h4>Semester : {{$kelas->semester}}</h4>
+    <h5>Tahun Ajaran  :2019-{{$kelas->tahunAjaran}}</h5>
     <form action="/nilaiUtsUas/lihat" method="GET"  class="form-inline" role="form">
         <div class="form-group col-md-2">
             <label for="sel1">Kelas : </label>

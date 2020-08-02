@@ -12,6 +12,7 @@
     <h2 >Daftar Nilai Tema  </h2>
     <h4>Kelas : {{$kelas->kelas}}</h4>
     <h4>Semester : {{$kelas->semester}}</h4>
+    <h5>Tahun Ajaran  :2019-{{$kelas->tahunAjaran}}</h5>
     <h4 >Tema : {{$nilaiTema->tema}}</h4>
     
     <form action="/nilaiTema/lihat" method="GET"  class="row" role="form">

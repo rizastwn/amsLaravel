@@ -8,6 +8,7 @@
     <h5>Kelas  : {{$kelas->kelas}}</h5>
     <h5>Tema : {{$nilaiTema->tema}}</h5>
     <h5>Subtema  : {{$nilaiTema->subtema}}</h5>
+    <h5>Tahun Ajaran  :2019-{{$kelas->tahunAjaran}}</h5>
     <h5>Jenis Nilai  : {{$nilaiTema->jenis}}</h5>
     
     @else

@@ -11,7 +11,7 @@
             <div class="col-sm">
                 <h5>Nama : {{$siswa->nama}}</h5>
                 <h5>Tempat, tanggal lahir : {{$siswa->tempatLahir}}, {{$siswa->tanggalLahir}}</h5>
-                <h5>Kelas : {{$siswa->kelas}}</h5>
+                <h5>Kelas : {{$siswa->kelas}} </h5>
                 <h5>Alamat : {{$siswa->alamat}}</h5>
                 <h5>Jenis Disabilitasi :{{$siswa->jenisDifabel}} </h5>
             </div>
